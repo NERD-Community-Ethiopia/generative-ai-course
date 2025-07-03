@@ -31,13 +31,16 @@ generative-ai-course/
 **Please see [STUDENT_GUIDE.md](STUDENT_GUIDE.md) for detailed submission instructions.**
 
 ### Quick Overview
+
 - Fork the repository
 - Work in `student-submissions/your-username/week-X/`
 - Submit PRs from your fork's main branch
 - No feature branches needed
 
 ### Learning Objectives
+
 This course teaches you:
+
 - Modern software development practices
 - CI/CD workflows and automation
 - Code quality and security best practices
@@ -49,12 +52,14 @@ This course teaches you:
 **Please see [INTERN_GUIDE.md](INTERN_GUIDE.md) for detailed workflow instructions.**
 
 ### Quick Overview
+
 - Get your personal branch: `intern/your-name` or `contributor/your-name`
 - Work on course materials and development
 - Submit PRs from your branch to `develop`
 - Coordinate with other contributors
 
 ### Development Workflow
+
 1. **Setup**: Clone repo and create your branch
 2. **Development**: Work on assigned features
 3. **Testing**: Run tests and quality checks
@@ -64,6 +69,7 @@ This course teaches you:
 ## 👨‍💼 For Administrators
 
 ### Responsibilities
+
 - Review and merge PRs to main branch
 - Manage course content and structure
 - Monitor CI/CD pipeline health
@@ -71,6 +77,7 @@ This course teaches you:
 - Coordinate with contributors
 
 ### Deployment Process
+
 1. **Review develop branch**: Ensure all tests pass
 2. **Create release PR**: develop → main
 3. **Final review**: Security and functionality check
@@ -80,12 +87,14 @@ This course teaches you:
 ## 🔧 Development Setup
 
 ### Prerequisites
+
 - Python 3.8+
 - Git
 - Docker (optional)
 - GitHub account
 
 ### Local Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/NERD-Community-Ethiopia/generative-ai-course.git
@@ -106,6 +115,7 @@ pre-commit install
 ```
 
 ### Docker Setup (Alternative)
+
 ```bash
 # Build and run with Docker Compose
 docker-compose up -d
@@ -119,6 +129,7 @@ docker-compose up lint     # Run linting
 ## 📋 Code Quality Standards
 
 ### Python Style Guide
+
 - **Formatter**: Black (line length: 88)
 - **Linter**: Flake8
 - **Type Checker**: MyPy
@@ -126,6 +137,7 @@ docker-compose up lint     # Run linting
 - **Dependencies**: Safety
 
 ### Code Review Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Tests are included and pass
 - [ ] Documentation is updated
@@ -134,6 +146,7 @@ docker-compose up lint     # Run linting
 - [ ] Performance considerations
 
 ### Commit Message Convention
+
 ```
 type(scope): description
 
@@ -143,6 +156,7 @@ type(scope): description
 ```
 
 Types:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -154,6 +168,7 @@ Types:
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 # Run all tests
 pytest
@@ -171,6 +186,7 @@ pytest -n auto
 ```
 
 ### Test Structure
+
 ```
 tests/
 ├── unit/              # Unit tests
@@ -182,6 +198,7 @@ tests/
 ## 🔒 Security
 
 ### Security Guidelines
+
 - Never commit sensitive information
 - Use environment variables for configuration
 - Follow OWASP Top 10 guidelines
@@ -189,6 +206,7 @@ tests/
 - Report vulnerabilities privately
 
 ### Security Tools
+
 - **Bandit**: Python security linter
 - **Safety**: Dependency vulnerability scanner
 - **GitHub Security Advisories**: Automated detection
@@ -196,12 +214,14 @@ tests/
 ## 📚 Documentation
 
 ### Documentation Standards
+
 - Use clear, concise language
 - Include code examples
 - Keep documentation up to date
 - Use proper formatting (Markdown)
 
 ### Documentation Structure
+
 ```
 docs/
 ├── getting-started.md
@@ -214,12 +234,14 @@ docs/
 ## 🤝 Collaboration
 
 ### Communication Channels
+
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and discussions
 - **Pull Requests**: Code reviews and feedback
 - **Wiki**: Course documentation and guides
 
 ### Code Review Process
+
 1. **Submit PR**: Create pull request with description
 2. **Automated Checks**: CI/CD pipeline runs tests
 3. **Review**: Team members review code
@@ -228,6 +250,7 @@ docs/
 6. **Merge**: Merge after all checks pass
 
 ### Conflict Resolution
+
 - Be respectful and constructive
 - Focus on the code, not the person
 - Provide specific, actionable feedback
@@ -237,6 +260,7 @@ docs/
 ## 🚀 CI/CD Pipeline
 
 ### Pipeline Stages
+
 1. **Quality Check**: Linting, formatting, type checking
 2. **Testing**: Unit and integration tests
 3. **Security**: Vulnerability scanning
@@ -244,6 +268,7 @@ docs/
 5. **Deploy**: Staging and production deployment
 
 ### Pipeline Triggers
+
 - **Push to main/develop**: Full pipeline
 - **Pull Request**: Quality checks and testing
 - **Student Submission**: Validation and feedback
@@ -252,12 +277,14 @@ docs/
 ## 📊 Quality Metrics
 
 ### Code Quality
+
 - **Test Coverage**: Minimum 80%
 - **Code Complexity**: Maximum 10 (McCabe)
 - **Security Issues**: Zero critical/high
 - **Documentation**: 100% API coverage
 
 ### Performance
+
 - **Build Time**: < 10 minutes
 - **Test Time**: < 5 minutes
 - **Deployment Time**: < 5 minutes
@@ -265,18 +292,21 @@ docs/
 ## 🎯 Contribution Areas
 
 ### High Priority
+
 - Course content development
 - Bug fixes and improvements
 - Security enhancements
 - Documentation updates
 
 ### Medium Priority
+
 - Feature additions
 - Performance optimizations
 - Tool integrations
 - Testing improvements
 
 ### Low Priority
+
 - Nice-to-have features
 - Cosmetic improvements
 - Experimental features
@@ -284,12 +314,14 @@ docs/
 ## 🏆 Recognition
 
 ### Contributor Recognition
+
 - GitHub contributors list
 - Course acknowledgments
 - Reference letters (upon request)
 - Portfolio projects
 
 ### Student Recognition
+
 - Course completion certificates
 - GitHub profile showcases
 - Portfolio additions
@@ -298,12 +330,14 @@ docs/
 ## 📞 Getting Help
 
 ### Support Resources
+
 - **Documentation**: Check docs first
 - **GitHub Issues**: For technical problems
 - **Discussions**: For questions and ideas
 - **Office Hours**: Scheduled sessions
 
 ### Emergency Contacts
+
 - **Security Issues**: security@example.com
 - **Technical Problems**: tech-support@example.com
 - **Course Questions**: course-instructor@example.com

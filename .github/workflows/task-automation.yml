@@ -1,0 +1,102 @@
+name: Agile Task Automation
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      week_number:
+        description: 'Week number for task generation'
+        required: true
+        default: '1'
+      task_type:
+        description: 'Type of tasks to generate'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - lectures
+          - workshops
+          - assignments
+          - documentation
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  generate-weekly-tasks:
+    name: Generate Weekly Tasks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install PyGithub python-dateutil
+    
+    - name: Generate weekly tasks
+      run: |
+        python scripts/generate_tasks.py \
+          --week ${{ github.event.inputs.week_number || '1' }} \
+          --type ${{ github.event.inputs.task_type || 'all' }} \
+          --token ${{ env.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+
+  assign-tasks:
+    name: Assign Tasks to Interns
+    runs-on: ubuntu-latest
+    needs: [generate-weekly-tasks]
+    if: github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install PyGithub
+    
+    - name: Assign tasks to interns
+      run: |
+        python scripts/assign_tasks.py --token ${{ env.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+
+  create-sprint-board:
+    name: Create Sprint Board
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install PyGithub
+    
+    - name: Create sprint board
+      run: |
+        python scripts/create_sprint_board.py --token ${{ env.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }} 

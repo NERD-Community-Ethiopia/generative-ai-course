@@ -76,3 +76,4 @@ passlib==1.7.4
 
 # Optional: GPU Support (uncomment if needed)
 # torch==2.1.0+cu118 --index-url https://download.pytorch.org/whl/cu118 
+

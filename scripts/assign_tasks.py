@@ -45,7 +45,7 @@ class TaskAssigner:
                 "current_tasks": 0
             },
             "intern3": {
-                "username": "nikodimo",  # Replace with actual usernames
+                "username": "Soyiaz",  # Replace with actual usernames
                 "name": "Intern Three",
                 "skills": ["python", "ci-cd", "security"],
                 "preferences": ["documentation", "enhancement"],

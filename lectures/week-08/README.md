@@ -6,6 +6,8 @@ This is the final week of the course where you'll integrate all the concepts lea
 
 ## 🎯 Learning Objectives
 
+
+
 By the end of this week, you will:
 - Plan and architect a complete AI application
 - Integrate all course concepts into a single project

@@ -33,7 +33,7 @@ class TaskAssigner:
                 "name": "Intern One",
                 "skills": ["python", "ai", "lectures"],
                 "preferences": ["lecture", "documentation"],
-                "max_tasks": 3,
+                "max_tasks": 5,
                 "current_tasks": 0
             },
             "intern2": {
@@ -41,7 +41,7 @@ class TaskAssigner:
                 "name": "Intern Two",
                 "skills": ["python", "workshops", "testing"],
                 "preferences": ["workshop", "assignment"],
-                "max_tasks": 3,
+                "max_tasks": 5,
                 "current_tasks": 0
             },
             "intern3": {
@@ -49,7 +49,7 @@ class TaskAssigner:
                 "name": "Intern Three",
                 "skills": ["python", "ci-cd", "security"],
                 "preferences": ["documentation", "enhancement"],
-                "max_tasks": 2,
+                "max_tasks": 5,
                 "current_tasks": 0
             }
         }

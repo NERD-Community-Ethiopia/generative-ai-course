@@ -34,6 +34,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
+    - name: Print environment variables
+      run: printenv | sort
+    
+    - name: Show Python version
+      run: python --version
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -42,6 +48,14 @@ jobs:
     - name: Install dependencies
       run: |
         pip install PyGithub python-dateutil
+    
+    - name: Debug: List files in scripts directory
+      run: |
+        ls -l scripts/
+    
+    - name: Debug: Show script arguments
+      run: |
+        echo "Args: --week ${{ github.event.inputs.week_number || '1' }} --type ${{ github.event.inputs.task_type || 'all' }} --token ${{ env.GITHUB_TOKEN }}"
     
     - name: Generate weekly tasks
       run: |
@@ -62,6 +76,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
+    - name: Print environment variables
+      run: printenv | sort
+    
+    - name: Show Python version
+      run: python --version
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -70,6 +90,10 @@ jobs:
     - name: Install dependencies
       run: |
         pip install PyGithub
+    
+    - name: Debug: List files in scripts directory
+      run: |
+        ls -l scripts/
     
     - name: Assign tasks to interns
       run: |

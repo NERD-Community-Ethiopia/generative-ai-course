@@ -31,18 +31,17 @@ def get_org_id(token, org):
         sys.exit(1)
     return resp.json()["data"]["organization"]["id"]
 
-def create_project(token, org_id, name, description):
+def create_project(token, org_id, name):
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json"
     }
     query = """
-    mutation($org: ID!, $name: String!, $body: String!) {
-      createProjectV2(input: {ownerId: $org, title: $name, shortDescription: $body}) {
+    mutation($org: ID!, $name: String!) {
+      createProjectV2(input: {ownerId: $org, title: $name}) {
         projectV2 {
           id
           title
-          shortDescription
           url
         }
       }
@@ -50,8 +49,7 @@ def create_project(token, org_id, name, description):
     """
     variables = {
         "org": org_id,
-        "name": name,
-        "body": description
+        "name": name
     }
     resp = requests.post(
         "https://api.github.com/graphql",
@@ -74,7 +72,7 @@ def main():
     args = parser.parse_args()
 
     org_id = get_org_id(args.token, args.org)
-    create_project(args.token, org_id, args.name, args.description)
+    create_project(args.token, org_id, args.name)
 
 if __name__ == "__main__":
     main() 

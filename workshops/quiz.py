@@ -28,6 +28,10 @@ def run_quiz():
     print(f"You scored {score} out of {len(questions)}.")
 
 if __name__ == "__main__":
+<<<<<<< Updated upstream
     run_quiz()
 
     
+=======
+    run_quiz()
+>>>>>>> Stashed changes

@@ -120,10 +120,10 @@ jobs:
       - name: Create Project (beta)
         run: |
           python scripts/create_project_beta.py \
-            --token ${{ env.GITHUB_TOKEN }} \
-            --org NERD-Community-Ethiopia \
-            --repo NERD-Community-Ethiopia/generative-ai-course \
-            --name "Sprint: Week ${{ github.event.inputs.week_number || '1' }}" \
-            --week ${{ github.event.inputs.week_number || '1' }}
+              --token ${{ env.GITHUB_TOKEN }} \
+              --org NERD-Community-Ethiopia \
+              --repo NERD-Community-Ethiopia/generative-ai-course \
+              --name "Sprint: Week ${{ github.event.inputs.week_number || '1' }}" \
+              --week ${{ github.event.inputs.week_number || '1' }}
         env:
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }} 

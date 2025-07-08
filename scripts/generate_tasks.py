@@ -202,16 +202,7 @@ class TaskGenerator:
                 ]
             }
         }
-<<<<<<< HEAD
-    
-    def create_milestone(self, week: str) -> Optional[object]:
-        """Create milestone for the week if it doesn't exist"""
-        milestone_title = f"Week {week}"
-        # Check if milestone already exists
-        for milestone in self.repo.get_milestones(state='open'):
-            if milestone.title == milestone_title:
-                return milestone
-=======
+
 
     def create_milestone(self, week: str) -> Optional[int]:
         """Create milestone for the week if it doesn't exist"""
@@ -222,7 +213,6 @@ class TaskGenerator:
             if milestone.title == milestone_title:
                 return milestone.number
 
->>>>>>> c388efd (adjusting generate file)
         # Create new milestone
         try:
             due_date = datetime.now() + timedelta(weeks=int(week))
@@ -268,28 +258,23 @@ class TaskGenerator:
         if week not in self.week_templates:
             print(f"Error: No template found for week {week}")
             return
-
-        # Create milestone
-<<<<<<< HEAD
-        milestone = self.create_milestone(week)
         
-=======
+        # Create milestone
         milestone_number = self.create_milestone(week)
 
->>>>>>> c388efd (adjusting generate file)
         # Create labels
         self.create_labels()
-
+        
         # Get tasks for the week
         week_data = self.week_templates[week]
         tasks = week_data["tasks"]
-
+        
         # Filter tasks by type if specified
         if task_type != "all":
             tasks = [task for task in tasks if task_type in task["labels"]]
-
+        
         created_issues = []
-
+        
         for task in tasks:
             try:
 <<<<<<< HEAD
@@ -316,16 +301,15 @@ class TaskGenerator:
                     body=task["body"],
                     labels=task["labels"],
                     assignees=task["assignees"],
-                    milestone=milestone_number
+                    milestone=milestone_obj
                 )
-
+                
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")
-
+                
             except GithubException as e:
                 print(f"Error creating issue '{task['title']}': {e}")
 
->>>>>>> c388efd (adjusting generate file)
         print(f"\nCreated {len(created_issues)} issues for Week {week}")
         return created_issues
 

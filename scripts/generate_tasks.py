@@ -203,7 +203,6 @@ class TaskGenerator:
             }
         }
 
-
     def create_milestone(self, week: str) -> Optional[int]:
         """Create milestone for the week if it doesn't exist"""
         milestone_title = f"Week {week}"
@@ -222,7 +221,7 @@ class TaskGenerator:
                 due_on=due_date
             )
             print(f"Created milestone: {milestone_title}")
-            return milestone
+            return milestone.number
         except GithubException as e:
             print(f"Error creating milestone: {e}")
             return None
@@ -277,31 +276,13 @@ class TaskGenerator:
         
         for task in tasks:
             try:
-<<<<<<< HEAD
-                issue_kwargs = {
-                    "title": task["title"],
-                    "body": task["body"],
-                    "labels": task["labels"],
-                    "assignees": task["assignees"],
-                }
-                if milestone is not None:
-                    issue_kwargs["milestone"] = milestone
-                issue = self.repo.create_issue(**issue_kwargs)
-                created_issues.append(issue)
-                print(f"Created issue: {issue.title} (#{issue.number})")
-            except Exception as e:
-                import traceback
-                print(f"Error creating issue '{task['title']}': {e}")
-                traceback.print_exc()
-        
-=======
                 # Create issue
                 issue = self.repo.create_issue(
                     title=task["title"],
                     body=task["body"],
                     labels=task["labels"],
                     assignees=task["assignees"],
-                    milestone=milestone_obj
+                    milestone=milestone_number
                 )
                 
                 created_issues.append(issue)

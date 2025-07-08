@@ -277,19 +277,18 @@ class TaskGenerator:
         
         for task in tasks:
             try:
-                # Create issue
-                issue = self.repo.create_issue(
-                    title=task["title"],
-                    body=task["body"],
-                    labels=task["labels"],
-                    assignees=task["assignees"],
-                    milestone=milestone_number
-                )
-                
+                issue_kwargs = {
+                    "title": task["title"],
+                    "body": task["body"],
+                    "labels": task["labels"],
+                    "assignees": task["assignees"],
+                }
+                if milestone_number is not None:
+                    issue_kwargs["milestone"] = milestone_number
+                issue = self.repo.create_issue(**issue_kwargs)
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")
-                
-            except GithubException as e:
+            except Exception as e:
                 print(f"Error creating issue '{task['title']}': {e}")
         
         print(f"\nCreated {len(created_issues)} issues for Week {week}")

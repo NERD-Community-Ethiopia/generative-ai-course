@@ -23,7 +23,7 @@ on:
           - documentation
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.TASK_BOT_TOKEN }}
 
 jobs:
   generate-weekly-tasks:

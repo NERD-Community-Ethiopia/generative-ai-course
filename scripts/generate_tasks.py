@@ -285,13 +285,13 @@ class TaskGenerator:
 
         for task in tasks:
             try:
-                # Only pass milestone if it's a Milestone object, else pass None
+                print("DEBUG: Not setting milestone in create_issue (diagnostic run)")
                 issue = self.repo.create_issue(
                     title=task["title"],
                     body=task["body"],
                     labels=task["labels"],
-                    assignees=task["assignees"],
-                    milestone=milestone_obj if milestone_obj else None
+                    assignees=task["assignees"]
+                    # milestone=milestone_obj if milestone_obj else None  # Temporarily removed for diagnostic
                 )
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")

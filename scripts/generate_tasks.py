@@ -258,7 +258,7 @@ class TaskGenerator:
             print(f"Error: No template found for week {week}")
             return
         
-        # Create milestone
+        # Create milestone (ignore the returned value)
         self.create_milestone(week)
         
         # Get the Milestone object (not just the number)
@@ -267,6 +267,7 @@ class TaskGenerator:
             if m.title == f"Week {week}":
                 milestone_obj = m
                 break
+        print(f"DEBUG: milestone_obj is {milestone_obj} (type: {type(milestone_obj)})")
         
         # Create labels
         self.create_labels()
@@ -283,7 +284,6 @@ class TaskGenerator:
         
         for task in tasks:
             try:
-                # Create issue
                 issue = self.repo.create_issue(
                     title=task["title"],
                     body=task["body"],
@@ -291,10 +291,8 @@ class TaskGenerator:
                     assignees=task["assignees"],
                     milestone=milestone_obj
                 )
-                
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")
-                
             except GithubException as e:
                 print(f"Error creating issue '{task['title']}': {e}")
         

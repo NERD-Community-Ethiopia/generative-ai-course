@@ -71,8 +71,9 @@ loguru==0.7.2
 prometheus-client==0.19.0
 
 # Security
-cryptography==41.0.8
+cryptography==41.0.7
 passlib==1.7.4
 
 # Optional: GPU Support (uncomment if needed)
 # torch==2.1.0+cu118 --index-url https://download.pytorch.org/whl/cu118 
+

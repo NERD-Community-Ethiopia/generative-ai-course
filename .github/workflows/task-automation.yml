@@ -33,35 +33,22 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
-    - name: Print environment variables (debug)
-      run: |
-        echo "GITHUB_TOKEN is set: [${{ env.GITHUB_TOKEN }}]"
-        echo "Event name: ${{ github.event_name }}"
-        echo "Inputs: week_number=${{ github.event.inputs.week_number }}, task_type=${{ github.event.inputs.task_type }}"
-
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-
+    
     - name: Install dependencies
       run: |
         pip install PyGithub python-dateutil
-
-    - name: Print Python version and pip list (debug)
-      run: |
-        python --version
-        pip list
-
+    
     - name: Generate weekly tasks
       run: |
-        echo "About to run generate_tasks.py with week=${{ github.event.inputs.week_number || '1' }} and type=${{ github.event.inputs.task_type || 'all' }}"
         python scripts/generate_tasks.py \
           --week ${{ github.event.inputs.week_number || '1' }} \
           --type ${{ github.event.inputs.task_type || 'all' }} \
           --token ${{ env.GITHUB_TOKEN }}
-        echo "generate_tasks.py finished with exit code $?"
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 

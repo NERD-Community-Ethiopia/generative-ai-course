@@ -204,15 +204,13 @@ class TaskGenerator:
             }
         }
     
-    def create_milestone(self, week: str) -> Optional[int]:
+    def create_milestone(self, week: str) -> Optional[object]:
         """Create milestone for the week if it doesn't exist"""
         milestone_title = f"Week {week}"
-        
         # Check if milestone already exists
         for milestone in self.repo.get_milestones(state='open'):
             if milestone.title == milestone_title:
-                return milestone.number
-        
+                return milestone
         # Create new milestone
         try:
             due_date = datetime.now() + timedelta(weeks=int(week))
@@ -222,7 +220,7 @@ class TaskGenerator:
                 due_on=due_date
             )
             print(f"Created milestone: {milestone_title}")
-            return milestone.number
+            return milestone
         except GithubException as e:
             print(f"Error creating milestone: {e}")
             return None
@@ -260,7 +258,7 @@ class TaskGenerator:
             return
         
         # Create milestone
-        milestone_number = self.create_milestone(week)
+        milestone = self.create_milestone(week)
         
         # Create labels
         self.create_labels()
@@ -283,13 +281,15 @@ class TaskGenerator:
                     "labels": task["labels"],
                     "assignees": task["assignees"],
                 }
-                if milestone_number is not None:
-                    issue_kwargs["milestone"] = milestone_number
+                if milestone is not None:
+                    issue_kwargs["milestone"] = milestone
                 issue = self.repo.create_issue(**issue_kwargs)
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")
             except Exception as e:
+                import traceback
                 print(f"Error creating issue '{task['title']}': {e}")
+                traceback.print_exc()
         
         print(f"\nCreated {len(created_issues)} issues for Week {week}")
         return created_issues

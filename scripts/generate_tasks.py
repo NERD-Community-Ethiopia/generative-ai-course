@@ -261,6 +261,9 @@ class TaskGenerator:
         
         # Create milestone
         milestone_number = self.create_milestone(week)
+        milestone_obj = None
+        if milestone_number:
+            milestone_obj = next((m for m in self.repo.get_milestones(state='open') if m.number == milestone_number), None)
         
         # Create labels
         self.create_labels()
@@ -283,7 +286,7 @@ class TaskGenerator:
                     body=task["body"],
                     labels=task["labels"],
                     assignees=task["assignees"],
-                    milestone=milestone_number
+                 milestone=milestone_obj  # Pass Milestone object here
                 )
                 
                 created_issues.append(issue)

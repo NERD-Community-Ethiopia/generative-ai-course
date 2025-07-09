@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Automated Task Generation Script
 
@@ -25,7 +24,7 @@ class TaskGenerator:
         self.github = Github(token)
         self.repo = self.github.get_repo(repo_name)
         self.week_templates = self._load_week_templates()
-    
+
     def _load_week_templates(self) -> Dict:
         """Load task templates for each week"""
         return {
@@ -203,6 +202,7 @@ class TaskGenerator:
                 ]
             }
         }
+<<<<<<< HEAD
     
     def create_milestone(self, week: str) -> Optional[object]:
         """Create milestone for the week if it doesn't exist"""
@@ -211,6 +211,18 @@ class TaskGenerator:
         for milestone in self.repo.get_milestones(state='open'):
             if milestone.title == milestone_title:
                 return milestone
+=======
+
+    def create_milestone(self, week: str) -> Optional[int]:
+        """Create milestone for the week if it doesn't exist"""
+        milestone_title = f"Week {week}"
+
+        # Check if milestone already exists
+        for milestone in self.repo.get_milestones(state='open'):
+            if milestone.title == milestone_title:
+                return milestone.number
+
+>>>>>>> c388efd (adjusting generate file)
         # Create new milestone
         try:
             due_date = datetime.now() + timedelta(weeks=int(week))
@@ -224,7 +236,7 @@ class TaskGenerator:
         except GithubException as e:
             print(f"Error creating milestone: {e}")
             return None
-    
+
     def create_labels(self):
         """Create labels if they don't exist"""
         labels_to_create = [
@@ -240,9 +252,9 @@ class TaskGenerator:
             {"name": "good first issue", "color": "7057ff", "description": "Good for newcomers"},
             {"name": "help wanted", "color": "008672", "description": "Extra attention is needed"},
         ]
-        
+
         existing_labels = {label.name for label in self.repo.get_labels()}
-        
+
         for label in labels_to_create:
             if label["name"] not in existing_labels:
                 try:
@@ -250,31 +262,37 @@ class TaskGenerator:
                     print(f"Created label: {label['name']}")
                 except GithubException as e:
                     print(f"Error creating label {label['name']}: {e}")
-    
+
     def generate_tasks(self, week: str, task_type: str = "all"):
         """Generate tasks for the specified week"""
         if week not in self.week_templates:
             print(f"Error: No template found for week {week}")
             return
-        
+
         # Create milestone
+<<<<<<< HEAD
         milestone = self.create_milestone(week)
         
+=======
+        milestone_number = self.create_milestone(week)
+
+>>>>>>> c388efd (adjusting generate file)
         # Create labels
         self.create_labels()
-        
+
         # Get tasks for the week
         week_data = self.week_templates[week]
         tasks = week_data["tasks"]
-        
+
         # Filter tasks by type if specified
         if task_type != "all":
             tasks = [task for task in tasks if task_type in task["labels"]]
-        
+
         created_issues = []
-        
+
         for task in tasks:
             try:
+<<<<<<< HEAD
                 issue_kwargs = {
                     "title": task["title"],
                     "body": task["body"],
@@ -291,6 +309,23 @@ class TaskGenerator:
                 print(f"Error creating issue '{task['title']}': {e}")
                 traceback.print_exc()
         
+=======
+                # Create issue
+                issue = self.repo.create_issue(
+                    title=task["title"],
+                    body=task["body"],
+                    labels=task["labels"],
+                    assignees=task["assignees"],
+                    milestone=milestone_number
+                )
+
+                created_issues.append(issue)
+                print(f"Created issue: {issue.title} (#{issue.number})")
+
+            except GithubException as e:
+                print(f"Error creating issue '{task['title']}': {e}")
+
+>>>>>>> c388efd (adjusting generate file)
         print(f"\nCreated {len(created_issues)} issues for Week {week}")
         return created_issues
 
@@ -303,20 +338,20 @@ def main():
     parser.add_argument("--token", required=True, help="GitHub token")
     parser.add_argument("--repo", default="NERD-Community-Ethiopia/generative-ai-course",
                        help="Repository name (owner/repo)")
-    
+
     args = parser.parse_args()
-    
+
     # Validate week number
     if not args.week.isdigit() or int(args.week) < 1 or int(args.week) > 8:
         print("Error: Week number must be between 1 and 8")
         sys.exit(1)
-    
+
     # Create task generator
     generator = TaskGenerator(args.token, args.repo)
-    
+
     # Generate tasks
     generator.generate_tasks(args.week, args.type)
 
 
 if __name__ == "__main__":
-    main() 
+    main()

@@ -119,7 +119,7 @@ jobs:
 
       - name: Create Project (beta)
         run: |
-          python scripts/create_project_beta.py \
+          python scripts/create_project.py \
               --token ${{ env.GITHUB_TOKEN }} \
               --org NERD-Community-Ethiopia \
               --repo NERD-Community-Ethiopia/generative-ai-course \

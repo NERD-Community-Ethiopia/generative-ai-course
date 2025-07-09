@@ -21,9 +21,8 @@ on:
           - workshops
           - assignments
           - documentation
-
-env:
-  GITHUB_TOKEN: ${{ secrets.TASK_BOT_TOKEN }}
+    env:
+      GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}  
 
 jobs:
   generate-weekly-tasks:

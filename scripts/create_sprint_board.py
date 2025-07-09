@@ -31,8 +31,7 @@ class SprintBoardCreator:
             # Create project board
             project = self.organization.create_project(
                 name=f"Sprint: {sprint_name}",
-                body=f"Agile sprint board for {sprint_name}",
-                state="open"
+                body=f"Agile sprint board for {sprint_name}"
             )
             
             print(f"Created project board: {project.name}")

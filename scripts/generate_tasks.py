@@ -29,6 +29,92 @@ class TaskGenerator:
     def _load_week_templates(self) -> Dict:
         """Load task templates for each week"""
         return {
+            "0": {
+                "title": "Week 0 Onboarding & GitHub Workflow",
+                "tasks": [
+                    {
+                        "title": "Set Up Your Dev Environment & Join Course Channels",
+                        "body": (
+                            "1. Install the required tools on your machine:\n"
+                            "   - Python 3.8+, Git, Docker, VS Code\n"
+                            "   - Follow the step-by-step guide (written or video) on Proton Drive.\n"
+                            "2. Create accounts (if you don’t have them):\n"
+                            "   - GitHub (github.com/signup)\n"
+                            "   - Element (for Matrix chat)\n"
+                            "   - Proton Drive (for resources)\n"
+                            "3. Join our course rooms on Element and verify you can post.\n\n"
+                            "**Deliverables:**\n"
+                            "- Screenshot of terminal showing `python --version`, `git --version` and `docker --version`.\n"
+                            "- Proof of joined course Element channel (a screenshot of your profile in the channel)."
+                        ),
+                        "labels": ["setup", "environment", "high-priority"],
+                        "assignees": [],
+                        "milestone": "Week 0 Onboarding"
+                    },
+                    {
+                        "title": "Introduction to Version Control with Git & GitHub",
+                        "body": (
+                            "Watch/attend the 60-minute recorded/live lecture covering:\n"
+                            "- What is version control and why it matters\n"
+                            "- Core Git commands: `git init`, `git add`, `git commit`, `git status`, `git log`\n"
+                            "- What is GitHub and collaborative workflows: forking, cloning, branching, pushing, pull requests\n"
+                            "- How to label issues and PRs effectively\n\n"
+                            "**Deliverables:**\n"
+                            "- Complete a short quiz on Git basics (posted in Element).\n"
+                            "- React to the lecture post with one question or insight."
+                        ),
+                        "labels": ["lecture", "git", "high-priority"],
+                        "assignees": [],
+                        "milestone": "Git & GitHub Workflow"
+                    },
+                    {
+                        "title": "Hands-On: Forking and Cloning a Repository",
+                        "body": (
+                            "Step-by-step exercise:\n"
+                            "1. Fork the starter repository on GitHub.\n"
+                            "2. Clone your fork locally.\n"
+                            "3. Verify your local setup by listing files and running a provided health-check script.\n\n"
+                            "**Deliverables:**\n"
+                            "- Post in Element with the URL of your fork and a screenshot of the health-check passing."
+                        ),
+                        "labels": ["workshop", "git", "high-priority"],
+                        "assignees": [],
+                        "milestone": "Git & GitHub Workflow"
+                    },
+                    {
+                        "title": "Hands-On: Branching and Making Changes",
+                        "body": (
+                            "Guide to:\n"
+                            "1. Create a new branch on your local repo:\n"
+                            "   - `git checkout -b week0-<your-name>`\n"
+                            "2. Make a simple code change (e.g., add `print(\"Hello, <Your Name>!\")` to `week0_<your-name>.py`).\n"
+                            "3. Commit with a meaningful message:\n"
+                            "   - `git add .`\n"
+                            "   - `git commit -m \"feat: add hello script for <Your Name>\"`\n\n"
+                            "**Deliverables:**\n"
+                            "- A screenshot of your local branch list (`git branch`) and commit history (`git log -1`)."
+                        ),
+                        "labels": ["workshop", "git", "high-priority"],
+                        "assignees": [],
+                        "milestone": "Git & GitHub Workflow"
+                    },
+                    {
+                        "title": "Hands-On: Pushing Changes & Creating a Pull Request",
+                        "body": (
+                            "1. Push your branch to GitHub:\n"
+                            "   - `git push origin week0-<your-name>`\n"
+                            "2. Open a Pull Request (PR) against the main branch of the original repo.\n"
+                            "3. Add a clear title, description, and apply the labels: workshop, git, high-priority\n"
+                            "4. If you have permission, merge your own PR; otherwise, request a review.\n\n"
+                            "**Deliverables:**\n"
+                            "- Link to your opened (and merged, if possible) Pull Request."
+                        ),
+                        "labels": ["workshop", "git", "high-priority"],
+                        "assignees": [],
+                        "milestone": "Git & GitHub Workflow"
+                    }
+                ]
+            },
             "1": {
                 "title": "Week 1: Introduction to Python and AI",
                 "tasks": [
@@ -314,8 +400,8 @@ def main():
     args = parser.parse_args()
     
     # Validate week number
-    if not args.week.isdigit() or int(args.week) < 1 or int(args.week) > 8:
-        print("Error: Week number must be between 1 and 8")
+    if not args.week.isdigit() or int(args.week) < 0 or int(args.week) > 8:
+        print("Error: Week number must be between 0 and 8")
         sys.exit(1)
     
     # Create task generator

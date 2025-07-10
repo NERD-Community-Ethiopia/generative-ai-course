@@ -11,6 +11,8 @@ def load_data(file_path: str) -> pd.DataFrame:
     except FileNotFoundError:
         print(f"Error: File {file_path} not found.")
         sys.exit(1)
+
+        
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

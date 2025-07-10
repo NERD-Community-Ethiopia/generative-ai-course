@@ -1,0 +1,76 @@
+[33mcommit cc51f877a94fa78dfb1789096b0abbc9db2ffae1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mintern/Nikodimos[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Natnael-Debel <debelnatnael@proton.me>
+Date:   Thu Jul 3 14:23:18 2025 +0300
+
+    feat: implement comprehensive CI/CD workflow and open-source infrastructure
+    
+    🎯 Complete Development Environment Setup
+    
+    CI/CD Pipeline:
+    - Enhanced GitHub Actions workflow with quality checks, testing, and security
+    - Multi-Python version testing (3.8, 3.9, 3.10, 3.11)
+    - Automated security scanning with Bandit and Safety
+    - Student submission validation and feedback system
+    - Docker build and deployment stages
+    - Scheduled dependency and security checks
+    
+    Documentation & Guidelines:
+    - Comprehensive CONTRIBUTING.md for all roles
+    - Detailed INTERN_GUIDE.md with professional workflow
+    - Complete STUDENT_GUIDE.md for assignment submissions
+    - SSH setup guide with troubleshooting
+    - Security policy and best practices
+    - Open-source contribution guidelines
+    
+    Development Tools:
+    - Modern pyproject.toml configuration
+    - Docker and docker-compose setup
+    - Makefile with development commands
+    - Pre-commit hooks and code quality tools
+    - Black, Flake8, MyPy, Bandit integration
+    
+    GitHub Features:
+    - PR templates for contributors and students
+    - Issue templates for bugs and features
+    - Branch protection rules
+    - DCO sign-off for open-source compliance
+    - Automated feedback system
+    
+    Infrastructure:
+    - .gitignore for Python, security, and course files
+    - Requirements management and dependency reporting
+    - Test suite configuration
+    - Development environment setup
+    
+    This establishes a professional-grade development environment
+    for the NERD Community Ethiopia Generative AI & Automation course,
+    teaching students real-world software development practices.
+    
+    Organization: NERD-Community-Ethiopia
+    Repository: generative-ai-course
+
+[33mcommit 164fe7fc6f58b7e44906c0ca1afbf96bc51a7911[m
+Author: Natnael-Debel <debelnatnael@proton.me>
+Date:   Thu Jul 3 13:41:20 2025 +0300
+
+    feat: implement comprehensive CI/CD workflow and documentation
+    
+    - Add enhanced CI/CD pipeline with quality checks, testing, and security
+    - Create comprehensive documentation for students, interns, and contributors
+    - Implement security policies and best practices
+    - Add Docker configuration and development tools
+    - Create PR templates and issue templates
+    - Add automated feedback system for student submissions
+    - Implement dependency management and reporting
+    - Add Makefile for development commands
+    - Configure modern Python development tools (Black, Flake8, MyPy, Bandit)
+    - Set up branch protection and workflow automation
+    
+    This commit establishes the foundation for professional development practices
+    in the Generative AI & Automation course.
+
+[33mcommit 98a0eaa4ab794e44508a174ca0446f7071960dd4[m
+Author: korje-debel <debel.k.natnael@proton.me>
+Date:   Wed Jul 2 12:45:34 2025 +0300
+
+    Initial commit

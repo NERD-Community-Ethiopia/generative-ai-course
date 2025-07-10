@@ -1,6 +1,6 @@
 # Student Guide - Assignment Submissions
 
-Welcome to the Generative AI & Automation course! This guide will help you submit your assignments correctly and learn professional development practices.
+Welcome Welcome to the Generative AI & Automation course! This guide will help you submit your assignments correctly and learn professional development practices.
 
 ## 🎯 Learning Objectives
 

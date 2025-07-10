@@ -29,7 +29,7 @@ class TaskAssigner:
         """Load intern information and preferences"""
         return {
             "intern1": {
-                "username": "intern1",  # Replace with actual usernames
+                "username": "Hayat373",  # Replace with actual usernames
                 "name": "Intern One",
                 "skills": ["python", "ai", "lectures"],
                 "preferences": ["lecture", "documentation"],
@@ -37,7 +37,7 @@ class TaskAssigner:
                 "current_tasks": 0
             },
             "intern2": {
-                "username": "intern2",  # Replace with actual usernames
+                "username": "biruk7479",  # Replace with actual usernames
                 "name": "Intern Two",
                 "skills": ["python", "workshops", "testing"],
                 "preferences": ["workshop", "assignment"],
@@ -45,7 +45,7 @@ class TaskAssigner:
                 "current_tasks": 0
             },
             "intern3": {
-                "username": "intern3",  # Replace with actual usernames
+                "username": "Soyiaz",  # Replace with actual usernames
                 "name": "Intern Three",
                 "skills": ["python", "ci-cd", "security"],
                 "preferences": ["documentation", "enhancement"],

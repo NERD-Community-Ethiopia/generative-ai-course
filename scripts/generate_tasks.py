@@ -112,6 +112,23 @@ class TaskGenerator:
                         "labels": ["workshop", "git", "high-priority"],
                         "assignees": [],
                         "milestone": "Git & GitHub Workflow"
+                    },
+                    {
+                        "title": "Peer Review: Review a Classmate’s Pull Request",
+                        "body": (
+                            "1. Find a classmate’s Pull Request (PR) for the Week 0 assignment in the repository.\n"
+                            "2. Review their code and leave constructive feedback:\n"
+                            "   - Is the code clear and correct?\n"
+                            "   - Does it follow the instructions?\n"
+                            "   - Are there any suggestions for improvement?\n"
+                            "3. Approve the PR if it meets the requirements, or request changes if needed.\n"
+                            "4. Mark this task as complete by posting a link to the PR you reviewed in the Element channel or as a comment on your own PR.\n\n"
+                            "**Deliverables:**\n"
+                            "- A link to the PR you reviewed and a brief summary of your feedback."
+                        ),
+                        "labels": ["review", "git", "collaboration", "medium-priority"],
+                        "assignees": [],
+                        "milestone": "Git & GitHub Workflow"
                     }
                 ]
             },

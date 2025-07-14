@@ -23,7 +23,7 @@ on:
           - documentation
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.TASK_BOT_TOKEN }}
 
 jobs:
   generate-weekly-tasks:
@@ -77,26 +77,53 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
-  create-sprint-board:
-    name: Create Sprint Board
+  # create-sprint-board:
+  #   name: Create Sprint Board
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'workflow_dispatch'
+    
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+    
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v4
+  #     with:
+  #       python-version: '3.11'
+    
+  #   - name: Install dependencies
+  #     run: |
+  #       pip install PyGithub
+    
+  #   - name: Create sprint board
+  #     run: |
+  #       python scripts/create_sprint_board.py --token ${{ env.GITHUB_TOKEN }} --week ${{ github.event.inputs.week_number || '1' }}
+  #     env:
+  #       GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+
+  create-sprint-board-beta:
+    name: Create Sprint Board (beta)
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
-    
+    needs: [generate-weekly-tasks]
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        pip install PyGithub
-    
-    - name: Create sprint board
-      run: |
-        python scripts/create_sprint_board.py --token ${{ env.GITHUB_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }} 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install PyGithub requests
+
+      - name: Create Project (beta)
+        run: |
+          python scripts/create_project_beta.py \
+                --token ${{ env.GITHUB_TOKEN }} \
+                --org NERD-Community-Ethiopia \
+                --repo NERD-Community-Ethiopia/generative-ai-course \
+                --name "Sprint: Week ${{ github.event.inputs.week_number || '1' }}" \
+                --week ${{ github.event.inputs.week_number || '1' }}
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }} 

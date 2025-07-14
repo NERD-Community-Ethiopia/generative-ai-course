@@ -28,30 +28,38 @@ class TaskAssigner:
     def _load_interns(self) -> Dict:
         """Load intern information and preferences"""
         return {
-            "intern1": {
-                "username": "intern1",  # Replace with actual usernames
-                "name": "Intern One",
-                "skills": ["python", "ai", "lectures"],
-                "preferences": ["lecture", "documentation"],
-                "max_tasks": 3,
-                "current_tasks": 0
-            },
-            "intern2": {
-                "username": "intern2",  # Replace with actual usernames
-                "name": "Intern Two",
-                "skills": ["python", "workshops", "testing"],
-                "preferences": ["workshop", "assignment"],
-                "max_tasks": 3,
-                "current_tasks": 0
-            },
-            "intern3": {
-                "username": "intern3",  # Replace with actual usernames
-                "name": "Intern Three",
-                "skills": ["python", "ci-cd", "security"],
-                "preferences": ["documentation", "enhancement"],
-                "max_tasks": 2,
-                "current_tasks": 0
-            }
+        "intern1": {
+            "username": "Hayat373",  # Replace with actual GitHub usernames
+            "name": "Hayat",
+            "skills": ["python", "ai", "workshop", "documentation", "setup", "onboarding"],
+            "preferences": ["lecture", "workshop", "assignment", "documentation", "setup", "onboarding"],
+            "max_tasks": 5,
+            "current_tasks": 0
+        },
+        "intern2": {
+            "username": "biruk7479",
+            "name": "Biruk",
+            "skills": ["python", "ai", "workshop", "documentation", "setup", "onboarding"],
+            "preferences": ["lecture", "workshop", "assignment", "documentation", "setup", "onboarding"],
+            "max_tasks": 5,
+            "current_tasks": 0
+        },
+        "intern3": {
+            "username": "Soyiaz",
+            "name": "Sosina",
+            "skills": ["python", "ai", "workshop", "documentation", "setup", "onboarding"],
+            "preferences": ["lecture", "workshop", "assignment", "documentation", "setup", "onboarding"],
+            "max_tasks": 5,
+            "current_tasks": 0
+        },
+        "intern4": {
+            "username": "nikodimo",
+            "name": "Nikodimos",
+            "skills": ["python", "ai", "workshop", "documentation", "setup", "onboarding"],
+            "preferences": ["lecture", "workshop", "assignment", "documentation", "setup", "onboarding"],
+            "max_tasks": 3,
+            "current_tasks": 0
+        }
         }
     
     def get_unassigned_issues(self) -> List:

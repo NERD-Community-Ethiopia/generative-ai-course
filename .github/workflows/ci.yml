@@ -248,7 +248,7 @@ jobs:
   build:
     name: Build Application
     runs-on: ubuntu-latest
-    # needs: [test]  # Removed dependency on test so build can run independently
+    needs: [quality-check]
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
     
     steps:
@@ -276,7 +276,7 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    # needs: [build]  # Removed dependency on build so deploy-staging can run independently
+    needs: [quality-check]
     if: github.ref == 'refs/heads/develop'
     
     steps:
@@ -308,7 +308,7 @@ jobs:
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    # needs: [build]  # Removed dependency on build so deploy-production can run independently
+    needs: [quality-check]
     if: github.ref == 'refs/heads/main'
     
     steps:

@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, develop, feature/*, hotfix/*, intern/* ]
 
-  paths:
+    paths:
       - 'student-submissions/**/week-*'  # Only for student-related pushes
       - '.github/workflows/ci.yml'
 

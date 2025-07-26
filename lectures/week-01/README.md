@@ -54,7 +54,7 @@ By the end of this week, you will:
 - Python 3.8+
 - Git and GitHub
 - Docker
-- Code editor (VS Code recommended)
+- Code editor (Cursor Code recommended)
 - Terminal/Command line
 
 **Environment Setup:**
@@ -74,7 +74,7 @@ pip install -r requirements.txt
 ## 🛠️ Workshop Preparation
 
 **Pre-workshop Tasks:**
-1. Complete environment setup
+1. Complete environment setup --> Onboarding Sprint
 2. Install required packages
 3. Test your first AI model interaction
 4. Familiarize yourself with the repository structure
@@ -103,11 +103,11 @@ pip install -r requirements.txt
 
 ## 📝 Assignment
 
-**Due Date**: End of Week 1
+**Due Date**: End of Week 2
 
 **Tasks:**
 1. Complete environment setup
-2. Create a simple AI agent using LangChain
+2. Create a simple python social network simulation using Networkx
 3. Submit your first pull request
 4. Document your setup process
 
@@ -118,11 +118,10 @@ pip install -r requirements.txt
 
 ## 🎯 Next Week Preview
 
-**Week 2: Building Your First AI Agent**
-- Agent architectures and frameworks
-- LangChain deep dive
+**Week 2: Running your first ML workflow**
+- ML architectures and frameworks
+- MLops deep dive
 - Prompt engineering techniques
-- Building conversational agents
 
 ## 💡 Tips for Success
 
@@ -134,9 +133,7 @@ pip install -r requirements.txt
 
 ## 📞 Support
 
-- **Element Support**: `#support`
-- **Office Hours**: TBD
-- **Email**: course-instructor@example.com
+- **Discord**: [Join here](https://discord.gg/WBwr3F4y)
 
 ---
 

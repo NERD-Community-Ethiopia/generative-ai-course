@@ -285,4 +285,8 @@ datasets/
 # Exclude specific student submission patterns
 student-submissions/*/node_modules/
 student-submissions/*/__pycache__/
-student-submissions/*/.env 
+student-submissions/*/.env
+
+# Ignore all meeting notes except the README
+meeting-notes/*
+!meeting-notes/README.md 

@@ -1,17 +1,16 @@
-# Welcome to NER Community! 🚀
+# Welcome to NERD Community! 🚀
 
 ## Introduction Session - Week 1
 
 ---
 
-## 🎯 Slide 1: Welcome to NER Community!
+## 🎯 Slide 1: Welcome to NERD Community!
 
 **Kickstarting a movement for Africa's next-gen AI & Robotics builders.**
 
-Welcome to the NER (Network of Engineering and Robotics) Community! We're not just another tech community — we're a movement dedicated to empowering Africa's brightest minds to become the builders of tomorrow's AI and robotics solutions.
+Welcome to the NERD (New Era Reasearch and Development) Community! We're not just another tech community — we're a movement dedicated to empowering Africa's brightest minds to become the builders of tomorrow's AI and robotics solutions.
 
 ### What Makes Us Different?
-- **Africa-Focused**: Built by Africans, for Africans
 - **Hands-On Learning**: Theory meets practice from day one
 - **Community-Driven**: Learn together, grow together
 - **Future-Ready**: Preparing you for the AI revolution
@@ -24,9 +23,9 @@ Welcome to the NER (Network of Engineering and Robotics) Community! We're not ju
 
 ### Our Three Pillars:
 
-1. **Learn**: Master cutting-edge AI and software development skills
-2. **Build**: Create real-world applications that solve African problems
-3. **Launch**: Deploy your solutions and make an impact
+1. **Prompt**: Master cutting-edge AI and software development skills using prompt as primary go skill.
+2. **Build**: Create real-world applications that solve real world problems
+3. **Opensource**: Give back to the community.
 
 ### What You'll Gain:
 - Professional software development skills
@@ -39,22 +38,17 @@ Welcome to the NER (Network of Engineering and Robotics) Community! We're not ju
 
 ## 🎯 Slide 3: Why We're Here
 
-**Africa needs creators, not just consumers — and we're building the future together.**
+**The world needs creators, not just consumers — and we're building the future together.**
 
 ### The Challenge:
-- Africa imports 90% of its technology
 - Limited local AI and robotics expertise
-- Brain drain of talented developers
 - Dependency on foreign solutions
 
 ### Our Solution:
 - **Build Local Talent**: Train the next generation of African developers
-- **Solve Local Problems**: Create solutions for African challenges
+- **Solve Global Problems**: Create solutions for African challenges
 - **Export Innovation**: Make Africa a tech exporter, not just consumer
 - **Create Opportunities**: Build the African tech ecosystem
-
-### The Vision:
-> "In 10 years, when people think of AI innovation, they'll think of Africa first."
 
 ---
 
@@ -1537,8 +1531,56 @@ Physical Layer (Cables, radio waves)
 ### Network Protocols:
 
 #### 🌐 **HTTP/HTTPS**
-- **Purpose**: Web communication
-- **HTTP**: Plain text (insecure)
-- **HTTPS**: Encrypted (secure)
-- **Methods**: GET, POST, PUT, DELETE
-- **Sta
+- **Purpose**: Web communication between browsers, apps, and servers
+- **HTTP**: HyperText Transfer Protocol (plain text, not encrypted)
+- **HTTPS**: Secure HTTP (encrypted using SSL/TLS)
+- **Methods**: 
+  - **GET**: Retrieve data
+  - **POST**: Send new data
+  - **PUT**: Update existing data
+  - **DELETE**: Remove data
+- **Status Codes**: Indicate result of request (e.g., 200 OK, 404 Not Found, 500 Server Error)
+
+#### 📦 **TCP/UDP**
+- **TCP (Transmission Control Protocol)**: Reliable, ordered, connection-based (used for web, email)
+- **UDP (User Datagram Protocol)**: Fast, connectionless, no guarantee of delivery (used for video, games)
+
+#### 📨 **SMTP/IMAP/POP3**
+- **SMTP**: Simple Mail Transfer Protocol (sending email)
+- **IMAP/POP3**: Receiving email
+
+#### 🖧 **Other Common Protocols**
+- **FTP/SFTP**: File Transfer Protocol (and Secure FTP)
+- **SSH**: Secure Shell (remote command line)
+- **DNS**: Domain Name System (translates names to IPs)
+- **DHCP**: Dynamic Host Configuration Protocol (assigns IP addresses)
+
+---
+
+## 🎯 Slide 26: How the Internet Works (In a Nutshell)
+
+1. **You type a website (e.g., www.nerd.africa) in your browser.**
+2. **DNS** translates the name to an IP address.
+3. **Your computer** sends an HTTP/HTTPS request to that IP.
+4. **Routers and switches** move your data across the world.
+5. **The server** receives your request, processes it, and sends a response.
+6. **Your browser** displays the website.
+
+---
+
+## 🎯 Slide 27: Why Developers Need to Know This
+
+- **Debugging**: Understand errors and connectivity issues
+- **Security**: Protect data in transit (use HTTPS, SSH)
+- **Performance**: Optimize network usage (choose TCP/UDP wisely)
+- **Deployment**: Configure servers, firewalls, and cloud services
+
+---
+
+## 🎉 End of Intro Session
+
+**You’ve just covered the foundations of AI, software, and the internet!**
+
+Next up: Hands-on coding, building, and deploying your first project 🚀
+
+---

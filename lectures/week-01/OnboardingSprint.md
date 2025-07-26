@@ -1194,7 +1194,7 @@ Congratulations! You've completed all 50 tasks in the NERD Dev Onboarding Sprint
 ### Skills Acquired
 - **IDE Mastery**: Proficient with Cursor IDE and AI-assisted coding
 - **Version Control**: Complete Git workflow from local to remote
-- **ContaiNERDization**: Docker fundamentals and best practices
+- **Containerization**: Docker fundamentals and best practices
 - **Workflow Integration**: Combining multiple tools effectively
 
 ### Portfolio Projects Created
@@ -1205,7 +1205,7 @@ Congratulations! You've completed all 50 tasks in the NERD Dev Onboarding Sprint
 ### Professional Development Practices
 - Code formatting and documentation
 - Version control with branching and merging
-- ContaiNERD-based development
+- Contaier-based development
 - CI/CD pipeline understanding
 - Security best practices (.gitignore, .dockerignore)
 

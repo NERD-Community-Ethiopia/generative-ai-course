@@ -12,6 +12,7 @@ import os
 import sys
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+import requests
 
 try:
     from github import Github, GithubException
@@ -19,6 +20,37 @@ except ImportError:
     print("Error: PyGithub not installed. Run: pip install PyGithub")
     sys.exit(1)
 
+# TODO: Set this to your GitHub Project (beta/v2) node_id
+PROJECT_NODE_ID = "<YOUR_PROJECT_NODE_ID>"
+
+# Set course start date from env or default
+COURSE_START_DATE_STR = os.getenv("COURSE_START_DATE", "2024-07-01")  # YYYY-MM-DD
+COURSE_START_DATE = datetime.strptime(COURSE_START_DATE_STR, "%Y-%m-%d")
+
+def get_current_week(start_date):
+    today = datetime.now()
+    delta = today - start_date
+    week = delta.days // 7 + 1
+    return min(max(week, 1), 8)  # Clamp between 1 and 8
+
+def add_issue_to_project(issue_node_id, project_node_id, github_token):
+    query = """
+    mutation {
+      addProjectV2ItemById(input: {projectId: \"%s\", contentId: \"%s\"}) {
+        item { id }
+      }
+    }
+    """ % (project_node_id, issue_node_id)
+    headers = {
+        "Authorization": f"Bearer {github_token}",
+        "Content-Type": "application/json"
+    }
+    response = requests.post(
+        "https://api.github.com/graphql",
+        json={"query": query},
+        headers=headers
+    )
+    print("Add to project response:", response.json())
 
 class TaskGenerator:
     def __init__(self, token: str, repo_name: str = "NERD-Community-Ethiopia/generative-ai-course"):
@@ -285,7 +317,8 @@ class TaskGenerator:
                     assignees=task["assignees"],
                     milestone=milestone_number
                 )
-                
+                # Add the created issue to the GitHub Project (beta/v2)
+                add_issue_to_project(issue.node_id, PROJECT_NODE_ID, self.github._Github__requester._Authorization__token)
                 created_issues.append(issue)
                 print(f"Created issue: {issue.title} (#{issue.number})")
                 
@@ -298,7 +331,7 @@ class TaskGenerator:
 
 def main():
     parser = argparse.ArgumentParser(description="Generate GitHub issues for weekly tasks")
-    parser.add_argument("--week", required=True, help="Week number (1-8)")
+    parser.add_argument("--week", required=False, help="Week number (1-8). If not set, auto-calculated from course start date.")
     parser.add_argument("--type", default="all", choices=["all", "lecture", "workshop", "assignment", "documentation"],
                        help="Type of tasks to generate")
     parser.add_argument("--token", required=True, help="GitHub token")
@@ -307,8 +340,15 @@ def main():
     
     args = parser.parse_args()
     
+    # Determine week number
+    if args.week is not None:
+        week = args.week
+    else:
+        week = str(get_current_week(COURSE_START_DATE))
+        print(f"Auto-calculated week: {week} (using course start date {COURSE_START_DATE.date()})")
+    
     # Validate week number
-    if not args.week.isdigit() or int(args.week) < 1 or int(args.week) > 8:
+    if not week.isdigit() or int(week) < 1 or int(week) > 8:
         print("Error: Week number must be between 1 and 8")
         sys.exit(1)
     
@@ -316,7 +356,7 @@ def main():
     generator = TaskGenerator(args.token, args.repo)
     
     # Generate tasks
-    generator.generate_tasks(args.week, args.type)
+    generator.generate_tasks(week, args.type)
 
 
 if __name__ == "__main__":

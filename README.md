@@ -278,12 +278,8 @@ By the end of this course, students will be able to:
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and discussions
 - **Element Channels**: Real-time support
-- **Office Hours**: Scheduled sessions
+- **Office Hours**: Scheduled sessions in discord
 
-### Emergency Contacts
-- **Security Issues**: security@example.com
-- **Technical Problems**: tech-support@example.com
-- **Course Questions**: course-instructor@example.com
 
 ## 📄 License
 

@@ -13,7 +13,6 @@ Welcome to the official repository for the **Generative AI & Automation** course
 ## 📚 Course Overview
 
 This is an 8-week intensive course for intermediate/advanced students to gain hands-on experience with:
-
 - Building and deploying generative agents
 - Fine-tuning foundation models (LLMs, diffusion)
 - Working with multimodal AI (text, image, audio, video)
@@ -52,7 +51,6 @@ generative-ai-course/
 This project implements a comprehensive CI/CD pipeline that demonstrates real-world development practices:
 
 ### Pipeline Stages
-
 1. **Quality Check**: Linting, formatting, type checking
 2. **Testing**: Unit and integration tests across Python versions
 3. **Security**: Vulnerability scanning with Bandit and Safety
@@ -61,7 +59,6 @@ This project implements a comprehensive CI/CD pipeline that demonstrates real-wo
 6. **Deploy**: Staging and production deployment
 
 ### Branch Strategy
-
 - **`main`**: Production-ready code (admin only)
 - **`develop`**: Integration branch for contributors
 - **`intern/*`**: Personal branches for interns
@@ -69,7 +66,6 @@ This project implements a comprehensive CI/CD pipeline that demonstrates real-wo
 - **`hotfix/*`**: Emergency fixes
 
 ### Automated Checks
-
 - ✅ Code formatting (Black)
 - ✅ Style checking (Flake8)
 - ✅ Type checking (MyPy)
@@ -80,21 +76,18 @@ This project implements a comprehensive CI/CD pipeline that demonstrates real-wo
 ## 🚀 Getting Started
 
 ### For Students
-
 1. **Fork** this repository to your GitHub account
 2. **Clone** your fork locally
 3. **Work** in `student-submissions/your-username/week-X/`
 4. **Submit** via Pull Request from your fork's main branch
 
 ### For Contributors/Interns
-
 1. **Clone** the repository
 2. **Create** your personal branch: `intern/your-name`
 3. **Install** dependencies: `make install`
 4. **Start** development: `make setup`
 
 ### For Administrators
-
 1. **Review** PRs to develop branch
 2. **Test** develop branch thoroughly
 3. **Deploy** to production via main branch
@@ -103,14 +96,12 @@ This project implements a comprehensive CI/CD pipeline that demonstrates real-wo
 ## 🛠️ Development Setup
 
 ### Prerequisites
-
 - Python 3.8+
 - Git
 - Docker (optional)
 - GitHub account
 
 ### Quick Setup
-
 ```bash
 # Clone repository
 git clone https://github.com/NERD-Community-Ethiopia/generative-ai-course.git
@@ -127,7 +118,6 @@ make setup
 ```
 
 ### Docker Setup (Alternative)
-
 ```bash
 # Build and run with Docker Compose
 docker-compose up -d
@@ -165,7 +155,6 @@ make status               # Show project status
 ## 🧪 Testing
 
 ### Test Structure
-
 ```
 tests/
 ├── unit/              # Unit tests
@@ -175,7 +164,6 @@ tests/
 ```
 
 ### Running Tests
-
 ```bash
 # All tests
 make test
@@ -191,13 +179,11 @@ pytest --cov=./ --cov-report=html
 ## 🔒 Security
 
 ### Security Tools
-
 - **Bandit**: Python security linter
 - **Safety**: Dependency vulnerability scanner
 - **GitHub Security Advisories**: Automated detection
 
 ### Security Practices
-
 - Never commit sensitive information
 - Use environment variables for configuration
 - Follow OWASP Top 10 guidelines
@@ -207,14 +193,12 @@ pytest --cov=./ --cov-report=html
 ## 📊 Quality Metrics
 
 ### Code Quality Standards
-
 - **Test Coverage**: Minimum 80%
 - **Code Complexity**: Maximum 10 (McCabe)
 - **Security Issues**: Zero critical/high
 - **Documentation**: 100% API coverage
 
 ### Performance Targets
-
 - **Build Time**: < 10 minutes
 - **Test Time**: < 5 minutes
 - **Deployment Time**: < 5 minutes
@@ -222,7 +206,6 @@ pytest --cov=./ --cov-report=html
 ## 🎯 Learning Objectives
 
 By the end of this course, students will be able to:
-
 - Design and implement generative AI agents
 - Fine-tune and deploy custom AI models
 - Build full-stack applications with AI integration
@@ -246,7 +229,6 @@ By the end of this course, students will be able to:
 ## 🛠️ Tech Stack
 
 ### Backend & AI/ML
-
 - **Python**: Core programming language
 - **FastAPI/Flask**: Web frameworks
 - **PyTorch**: Deep learning framework
@@ -255,7 +237,6 @@ By the end of this course, students will be able to:
 - **OpenAI**: API integration
 
 ### Development & DevOps
-
 - **Git & GitHub**: Version control and collaboration
 - **Docker**: Containerization
 - **GitHub Actions**: CI/CD automation
@@ -265,7 +246,6 @@ By the end of this course, students will be able to:
 - **Bandit/Safety**: Security tools
 
 ### Frontend & Deployment
-
 - **React/Vue.js**: Frontend frameworks
 - **RESTful APIs**: API design
 - **WebSocket**: Real-time communication
@@ -275,21 +255,18 @@ By the end of this course, students will be able to:
 ## 🤝 Contributing
 
 ### For Students
-
 - Submit assignments via Pull Requests
 - Follow the [Student Guide](STUDENT_GUIDE.md)
 - Use the student PR template
 - Get automated feedback
 
 ### For Contributors
-
 - Follow the [Intern Guide](INTERN_GUIDE.md)
 - Use feature branches
 - Submit PRs to develop branch
 - Participate in code reviews
 
 ### For Administrators
-
 - Review and merge PRs
 - Monitor CI/CD pipeline
 - Handle security incidents
@@ -298,17 +275,11 @@ By the end of this course, students will be able to:
 ## 📞 Support
 
 ### Communication Channels
-
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and discussions
 - **Element Channels**: Real-time support
-- **Office Hours**: Scheduled sessions
+- **Office Hours**: Scheduled sessions in discord
 
-### Emergency Contacts
-
-- **Security Issues**: security@example.com
-- **Technical Problems**: tech-support@example.com
-- **Course Questions**: course-instructor@example.com
 
 ## 📄 License
 
@@ -317,14 +288,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🏆 Recognition
 
 ### Student Benefits
-
 - **Portfolio Projects**: Each assignment becomes a portfolio piece
 - **GitHub Profile**: Professional development history
 - **Real-world Skills**: Industry-standard practices
 - **Networking**: Connect with other developers
 
 ### Contributor Benefits
-
 - **GitHub Contributors**: Recognition in project history
 - **Reference Letters**: Professional recommendations
 - **Skill Development**: Advanced development practices
@@ -332,4 +301,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**This course teaches both AI/ML skills and professional software development practices. Students learn to work like real developers while building cutting-edge AI applications.**
+**This course teaches both AI/ML skills and professional software development practices. Students learn to work like real developers while building cutting-edge AI applications.** 

@@ -12,6 +12,14 @@ This course teaches you:
 
 ## 🚀 Quick Start
 
+### Why Use a Submission Branch?
+The submission branch workflow ensures that:
+- **Main branch stays clean**: Always serves as a clean starter template
+- **New students get fresh start**: Each new student gets the original course structure
+- **Organized submissions**: All student work goes to a separate `student-submissions` branch
+- **Easy maintenance**: Instructors can manage submissions without affecting the starter template
+- **Proper separation**: Student work never pollutes the main branch
+
 ### 1. Fork the Repository
 1. Go to the main course repository on GitHub
 2. Click the "Fork" button in the top right
@@ -24,7 +32,15 @@ git clone https://github.com/your-username/generative-ai-course.git
 cd generative-ai-course
 ```
 
-### 3. Set Up Your Environment
+### 3. Create and Switch to Submission Branch
+```bash
+# Create and switch to a submission branch for your work
+git checkout -b submission
+
+# This keeps the main branch clean as a starter template
+```
+
+### 4. Set Up Your Environment
 ```bash
 # Create a Python virtual environment
 python -m venv venv
@@ -83,17 +99,24 @@ git add student-submissions/your-username/week-01/
 # Commit with a descriptive message
 git commit -m "Week 1: Implemented sentiment analysis using NLTK"
 
-# Push to your fork
-git push origin main
+# Push to your submission branch
+git push origin submission
 ```
 
 ## 🔄 Submitting Your Assignment
 
+### Important: Branch Structure
+The course repository uses this branch structure:
+- **`main`**: Clean starter template (never contains student work)
+- **`student-submissions`**: Branch where all student submissions are collected
+- **`submission`**: Your personal branch for your work
+
 ### Step 1: Create a Pull Request
 1. Go to your fork on GitHub
 2. Click "Compare & pull request"
-3. Set the target to the original course repository
-4. Use this title format: "Student Submission: Week X - [Your Name]"
+3. **Important**: Set the base branch to `submission` and the compare branch to `submission`
+4. Set the target to the original course repository's `student-submissions` branch (not main)
+5. Use this title format: "Student Submission: Week X - [Your discord Name]"
 
 ### Step 2: Fill Out the PR Template
 The template will automatically appear. Fill it out completely:
@@ -202,7 +225,7 @@ python hello_ai.py --input data/sample_text.txt
 
 ### Don't Do This
 - Submit work outside the `student-submissions/` folder
-- Create feature branches (work directly on main)
+- Work directly on the main branch (use submission branch instead)
 - Forget to include README.md
 - Submit incomplete or non-functional code
 - Include API keys or sensitive data
@@ -210,7 +233,7 @@ python hello_ai.py --input data/sample_text.txt
 
 ### ✅ Do This Instead
 - Put all work in `student-submissions/your-username/week-X/`
-- Work directly on your fork's main branch
+- Work on your submission branch (keeps main clean as starter template)
 - Include comprehensive documentation
 - Test your code before submitting
 - Use environment variables for sensitive data
@@ -268,7 +291,13 @@ python -c "import sys; sys.path.append('.'); from student_submissions.your_usern
 1. **Automated checks**: CI/CD pipeline validates your submission
 2. **Review process**: Instructors review your work
 3. **Feedback**: You'll receive comments on your PR
-4. **Grading**: Final grades posted within 1 week
+4. **Merging**: If approved, your work gets merged into the `student-submissions` branch (not main)
+5. **Grading**: Final grades posted within 1 week
+
+### Branch Protection
+- The `main` branch is protected and never receives student submissions
+- All student work goes to the `student-submissions` branch
+- This ensures new students always get a clean starter template
 
 ### Receiving Feedback
 - Check your PR for comments

@@ -20,7 +20,7 @@ We take security vulnerabilities seriously. If you discover a security vulnerabi
 Security vulnerabilities should be reported privately to avoid potential exploitation.
 
 ### 2. Report the vulnerability
-Send an email to: [security@example.com](mailto:security@example.com)
+Discord
 
 Include the following information:
 - Description of the vulnerability
@@ -106,9 +106,7 @@ SECRET_KEY=your_secret_here
 6. **Lessons Learned**: Document and improve
 
 ### Contact Information
-- **Security Team**: [security@example.com](mailto:security@example.com)
-- **Emergency Contact**: [emergency@example.com](mailto:emergency@example.com)
-- **GitHub Security**: Use GitHub's security advisory feature
+**Discord**
 
 ## Compliance
 
@@ -119,7 +117,7 @@ This project follows these security standards:
 
 ## Updates
 
-This security policy is reviewed and updated regularly. Last updated: [Current Date]
+This security policy is reviewed and updated regularly. 
 
 ---
 

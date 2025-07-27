@@ -302,7 +302,7 @@ By the end of this course, students will be able to:
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and discussions
 - **Element Channels**: Real-time support
-- **Office Hours**: Scheduled sessions
+- **Office Hours**: Scheduled sessions in discord
 
 ### Emergency Contacts
 

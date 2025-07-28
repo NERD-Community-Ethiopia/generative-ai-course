@@ -1,0 +1,3 @@
+#Python dependencies for week-01 assignment
+# textblob 
+# nltk 

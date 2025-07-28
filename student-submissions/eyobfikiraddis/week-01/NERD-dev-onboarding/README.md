@@ -1,4 +1,4 @@
-# Week 01 Submission - amen-meb
+# Week 01 Submission
 
 ## Student Information
 

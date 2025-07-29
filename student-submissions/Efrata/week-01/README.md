@@ -1,4 +1,4 @@
-# Week 1 Submission - Efrata 
+# Week 1 Submission - Efrata Alemseged
 
 ## Environment Setup
 - [x] Python 3.8+ installed

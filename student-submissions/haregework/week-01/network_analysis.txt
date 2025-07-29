@@ -1,0 +1,44 @@
+SOCIAL NETWORK ANALYSIS REPORT
+========================================
+
+Generated on: 2025-07-28 12:17:54
+
+NETWORK STATISTICS
+--------------------
+Total Users: 20
+Total Connections: 20
+Average Degree: 2.00
+Network Density: 0.105
+Connected Components: 3
+Number of Communities: 6
+Largest Community Size: 7
+Scale-Free Network: No
+
+CENTRALITY ANALYSIS
+--------------------
+Most Connected User: Jack Johnson (Degree Centrality: 0.211)
+Most Central User: Jack Lopez (Betweenness Centrality: 0.494)
+Most Closeness User: Jack Lopez (Closeness Centrality: 0.371)
+
+USER DETAILS
+--------------------
+Charlie Wilson (Age: 38, Degree: 3, Interests: Music, Art)
+Jack Johnson (Age: 48, Degree: 4, Interests: Cooking, Sports, Science, Gaming)
+Diana Davis (Age: 32, Degree: 2, Interests: Gaming, Reading)
+Quinn Moore (Age: 18, Degree: 3, Interests: Art, Technology, Music, Sports)
+Diana Anderson (Age: 20, Degree: 3, Interests: Gaming, Music, Cooking)
+Noah Garcia (Age: 38, Degree: 1, Interests: Art, Sports)
+Ruby Davis (Age: 58, Degree: 2, Interests: Science, Travel, Art, AI)
+Kate Jackson (Age: 30, Degree: 1, Interests: AI, Gaming, Reading, Art)
+Mia Jackson (Age: 59, Degree: 0, Interests: Gaming, Technology, Music, AI, Travel)
+Diana Smith (Age: 52, Degree: 1, Interests: Gaming, Cooking, Sports)
+Olivia Brown (Age: 55, Degree: 3, Interests: Reading, Music, Technology, Cooking, AI)
+Quinn Wilson (Age: 21, Degree: 2, Interests: Sports, Cooking, Science, Music, Technology)
+Frank Miller (Age: 42, Degree: 2, Interests: Cooking, Art, Reading)
+Noah Smith (Age: 52, Degree: 2, Interests: Gaming, Technology)
+Paul Hernandez (Age: 40, Degree: 2, Interests: Reading, Cooking, Travel, Science)
+Olivia Taylor (Age: 39, Degree: 0, Interests: AI, Art, Music, Reading)
+Quinn Jones (Age: 28, Degree: 1, Interests: Music, Reading, Gaming, Science, Sports)
+Charlie Williams (Age: 52, Degree: 2, Interests: Reading, Science)
+Jack Lopez (Age: 42, Degree: 4, Interests: AI, Art, Science)
+Grace Wilson (Age: 28, Degree: 2, Interests: Cooking, Music)

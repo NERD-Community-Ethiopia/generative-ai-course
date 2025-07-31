@@ -1,0 +1,7 @@
+# Python dependencies for week-01 assignment
+# Add required packages here
+
+# Example dependencies (modify as needed):
+# numpy==1.21.0
+# pandas==1.3.0
+# matplotlib==3.4.0 

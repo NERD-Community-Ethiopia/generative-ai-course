@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-This guide will walk you through completing all 50 tasks in the NERDD Dev Onboarding Sprint Week 1. The tasks are organized into four main categories:
+This guide will walk you through completing all 50 tasks in the NERD Dev Onboarding Sprint Week 1. The tasks are organized into four main categories:
 - **Cursor Setup** (11 tasks)
 - **Git Fundamentals** (18 tasks)
 - **Docker Basics** (16 tasks)

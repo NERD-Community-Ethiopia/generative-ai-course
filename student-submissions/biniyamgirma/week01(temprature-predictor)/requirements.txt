@@ -1,0 +1,7 @@
+pandas==2.0.3
+numpy
+matplotlib
+seaborn
+scikit-learn
+joblib
+python-dateutil

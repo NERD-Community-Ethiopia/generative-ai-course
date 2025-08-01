@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain_openai import OpenAI  # Make sure to use the correct import
+from langchain_openai import OpenAI  
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 
@@ -50,7 +50,7 @@ def main():
     for i, question in enumerate(test_questions, 1):
         print(f"Question {i}: {question}")
         try:
-            response = agent.invoke({"question": question})  # Use invoke method
+            response = agent.invoke({"question": question})  
             print(f"Answer: {response}\n")
         except Exception as e:
             print(f"Error: {e}\n")

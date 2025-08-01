@@ -1,29 +1,35 @@
-# Week 1 Submission - Arsema Mandefro
+# Week 1 Submission – Arsema Mandefro
 
-## Environment Setup
-- [x] Python 3.8+ installed
-- [x] Virtual environment created
-- [x] Dependencies installed
-- [x] API keys configured
+## ✅ Environment Setup
+- [x] Python 3.8+ installed  
+- [x] Virtual environment created  
+- [x] Dependencies installed  
+- [x] API keys configured  
 
-## Completed Exercises
-- [x] Simple AI Agent
-- [x] Interactive Chat Agent
-- [x] Specialized Code Review Agent
+## ✅ Completed Exercises
+- [x] Simple AI Agent  
+- [x] Interactive Chat Agent  
+- [x] Specialized Code Review Agent  
 
-## Challenges Faced
-I encountered several challenges throughout this week:
-- **Understanding API integration**: Initially, I struggled with how to correctly integrate the OpenAI API. I resolved this by reviewing the official documentation and experimenting with sample code.
-- **Debugging errors**: I faced several errors related to dependency installations. This was solved by ensuring all packages were compatible and up to date.
+## ⚠️ Challenges Faced
+Throughout this week, I encountered and overcame several challenges:
 
-## Learning Outcomes
-This workshop significantly enhanced my understanding of:
-- How to set up and configure a virtual environment.
-- The process of building a basic AI agent using OpenAI's API.
-- Techniques for managing conversation state in interactive agents.
+- **API Integration**:  
+  I initially struggled with integrating the OpenAI API correctly. This was resolved by thoroughly reviewing the official documentation and experimenting with example code.
 
-## Next Steps
-Moving forward, I plan to explore:
-- Advanced features of the OpenAI API, including fine-tuning models.
-- Building more complex agents that can handle multi-turn conversations effectively.
-- Integrating additional functionalities, such as data retrieval and processing.
+- **Dependency Issues**:  
+  I faced errors due to incompatible or missing packages. I resolved these by ensuring all dependencies were correctly installed and compatible with my Python version.
+
+## 🎯 Key Learning Outcomes
+This week helped me strengthen my skills in:
+
+- Setting up and managing Python virtual environments  
+- Building AI agents using OpenAI's API  
+- Managing conversational memory in interactive agents  
+
+## 🚀 Next Steps
+To continue progressing, I plan to:
+
+- Explore advanced OpenAI API capabilities, such as model fine-tuning  
+- Build more advanced agents with multi-turn conversation handling  
+- Integrate data retrieval and processing features into my agents

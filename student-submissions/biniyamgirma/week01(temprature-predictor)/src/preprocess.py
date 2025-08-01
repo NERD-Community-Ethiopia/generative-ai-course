@@ -36,6 +36,6 @@ def preprocess_data(input_path, output_path):
 
 if __name__ == "__main__":
     preprocess_data(
-        input_path="/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/data/weatherHistory.csv",
-        output_path="/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/data/processed_temperatures.csv"
+        input_path="./data/weatherHistory.csv",
+        output_path="./data/processed_temperatures.csv"
     )

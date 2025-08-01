@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 
 def evaluate_model():
     # Load model and test data
-    model = joblib.load("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/models/linear_regression_model.pkl")
-    df = pd.read_csv("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/data/processed_temperatures.csv")
+    model = joblib.load("./models/linear_regression_model.pkl")
+    df = pd.read_csv("./data/processed_temperatures.csv")
     
     X = df.drop('Temperature (C)', axis=1)
     y = df['Temperature (C)']
@@ -21,7 +21,7 @@ def evaluate_model():
     y_pred = model.predict(X_test)
     
     # Create visualizations directory
-    os.makedirs("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/visuals", exist_ok=True)
+    os.makedirs("./visuals", exist_ok=True)
     
     # Plot actual vs predicted
     plt.figure(figsize=(10, 6))
@@ -30,7 +30,7 @@ def evaluate_model():
     plt.ylabel('Predicted Temperature (C)')
     plt.title('Actual vs Predicted Temperatures')
     plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'r--')
-    plt.savefig("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/visuals/actual_vs_predicted.png")
+    plt.savefig("./visuals/actual_vs_predicted.png")
     plt.close()
     
     # Plot residuals
@@ -39,7 +39,7 @@ def evaluate_model():
     sns.histplot(residuals, kde=True)
     plt.xlabel('Residuals')
     plt.title('Distribution of Residuals')
-    plt.savefig("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/visuals/residuals_distribution.png")
+    plt.savefig("./visuals/residuals_distribution.png")
     plt.close()
     
     print("Evaluation visualizations saved to ../visuals/")

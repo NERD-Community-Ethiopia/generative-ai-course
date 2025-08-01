@@ -18,7 +18,7 @@ def predict_temperature(features):
         float: Predicted temperature in Celsius
     """
     # Load model
-    model = joblib.load("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/models/linear_regression_model.pkl")
+    model = joblib.load("./models/linear_regression_model.pkl")
     
     # Convert features to DataFrame
     input_df = pd.DataFrame([features])

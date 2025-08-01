@@ -7,7 +7,7 @@ import os
 
 def train_model():
     # Load processed data
-    df = pd.read_csv("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/data/processed_temperatures.csv")
+    df = pd.read_csv("./data/processed_temperatures.csv")
     
     # Split features and target
     X = df.drop('Temperature (C)', axis=1)
@@ -33,9 +33,9 @@ def train_model():
     print(f"R2 Score: {r2:.2f}")
     
     # Save model
-    os.makedirs("/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/models", exist_ok=True)
-    joblib.dump(model, "/mnt/hdd/bini/ai&robotics/generative-ai-course/student-submissions/biniyamgirma/week01(temprature-predictor)/models/linear_regression_model.pkl")
-    print("Model saved to ../models/linear_regression_model.pkl")
+    os.makedirs("../models", exist_ok=True)
+    joblib.dump(model, "./models/linear_regression_model.pkl")
+    print("Model saved to ./models/linear_regression_model.pkl")
     
     return model, X_test, y_test
 

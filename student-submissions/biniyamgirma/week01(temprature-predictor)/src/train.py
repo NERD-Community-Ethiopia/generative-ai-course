@@ -1,11 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 import os
 
-def train_model():
+def train_models():
     # Load processed data
     df = pd.read_csv("./data/processed_temperatures.csv")
     
@@ -18,26 +19,43 @@ def train_model():
         X, y, test_size=0.2, random_state=42
     )
     
-    # Train model
-    model = LinearRegression()
-    model.fit(X_train, y_train)
+    # Dictionary to store models and their results
+    models = {
+        'linear_regression': LinearRegression(),
+        'decision_tree': DecisionTreeRegressor(random_state=42)
+    }
     
-    # Evaluate
-    y_pred = model.predict(X_test)
-    mae = mean_absolute_error(y_test, y_pred)
-    mse = mean_squared_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
+    results = {}
     
-    print(f"MAE: {mae:.2f}")
-    print(f"MSE: {mse:.2f}")
-    print(f"R2 Score: {r2:.2f}")
+    for model_name, model in models.items():
+        print(f"\nTraining {model_name}...")
+        
+        # Train model
+        model.fit(X_train, y_train)
+        
+        # Evaluate
+        y_pred = model.predict(X_test)
+        mae = mean_absolute_error(y_test, y_pred)
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+        
+        # Store results
+        results[model_name] = {
+            'mae': mae,
+            'mse': mse,
+            'r2': r2
+        }
+        
+        print(f"MAE: {mae:.2f}")
+        print(f"MSE: {mse:.2f}")
+        print(f"R2 Score: {r2:.2f}")
+        
+        # Save model
+        os.makedirs("./models", exist_ok=True)
+        joblib.dump(model, f"./models/{model_name}_model.pkl")
+        print(f"Model saved to ./models/{model_name}_model.pkl")
     
-    # Save model
-    os.makedirs("../models", exist_ok=True)
-    joblib.dump(model, "./models/linear_regression_model.pkl")
-    print("Model saved to ./models/linear_regression_model.pkl")
-    
-    return model, X_test, y_test
+    return results
 
 if __name__ == "__main__":
-    train_model()
+    train_models()

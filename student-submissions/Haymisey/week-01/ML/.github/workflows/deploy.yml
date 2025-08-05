@@ -1,0 +1,123 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run linting
+      run: |
+        pip install flake8 black
+        flake8 src/ app/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        black --check src/ app/
+    
+    - name: Run tests
+      run: |
+        pip install pytest
+        pytest tests/ -v
+
+  build-and-test-api:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run data pipeline
+      run: |
+        python src/data_loader.py
+        python src/preprocess.py
+    
+    - name: Train model
+      run: |
+        python src/train.py --config config/train_config.yaml
+    
+    - name: Test API endpoints
+      run: |
+        # Start API server in background
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+        sleep 10
+        
+        # Test health endpoint
+        curl -f http://localhost:8000/health
+        
+        # Test prediction endpoint
+        curl -X POST "http://localhost:8000/predict" \
+          -H "Content-Type: application/json" \
+          -d '{"features": [17.99, 10.38, 122.8, 1001.0, 0.1184, 0.2776, 0.3001, 0.1471, 0.2419, 0.07871, 1.095, 0.9053, 8.589, 153.4, 0.006399, 0.04904, 0.05373, 0.01587, 0.03003, 0.006193, 25.38, 17.33, 184.6, 2019.0, 0.1622, 0.6656, 0.7119, 0.2654, 0.4601, 0.1189]}'
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: build-and-test-api
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build Docker image
+      run: |
+        docker build -t breast-cancer-ml .
+    
+    - name: Test Docker container
+      run: |
+        # Run container in background
+        docker run -d -p 8000:8000 --name test-api breast-cancer-ml
+        sleep 15
+        
+        # Test health endpoint
+        curl -f http://localhost:8000/health
+        
+        # Test prediction endpoint
+        curl -X POST "http://localhost:8000/predict" \
+          -H "Content-Type: application/json" \
+          -d '{"features": [17.99, 10.38, 122.8, 1001.0, 0.1184, 0.2776, 0.3001, 0.1471, 0.2419, 0.07871, 1.095, 0.9053, 8.589, 153.4, 0.006399, 0.04904, 0.05373, 0.01587, 0.03003, 0.006193, 25.38, 17.33, 184.6, 2019.0, 0.1622, 0.6656, 0.7119, 0.2654, 0.4601, 0.1189]}'
+        
+        # Clean up
+        docker stop test-api
+        docker rm test-api
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker-build
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to production
+      run: |
+        echo "Deployment to production would happen here"
+        echo "This could include:"
+        echo "- Pushing to Docker Hub"
+        echo "- Deploying to cloud platform"
+        echo "- Updating production environment" 

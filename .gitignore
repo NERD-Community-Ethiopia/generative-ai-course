@@ -290,3 +290,4 @@ student-submissions/*/.env
 # Ignore all meeting notes except the README
 meeting-notes/*
 !meeting-notes/README.md 
+scripts/*

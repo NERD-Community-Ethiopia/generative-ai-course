@@ -1,0 +1,38 @@
+# Training Configuration for Breast Cancer Classification Model
+
+model:
+  type: svm
+  kernel: rbf
+  C: 1.0
+  gamma: scale
+
+training:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+
+hyperparameter_tuning:
+  enable: true
+  param_grid:
+    C: [0.1, 1, 10, 100]
+    gamma: [scale, auto, 0.001, 0.01, 0.1]
+    kernel: [rbf, linear]
+
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1
+
+data:
+  preprocessing:
+    feature_selection: true
+    n_features: 15
+    scaling: true
+    encoding: true
+
+logging:
+  level: INFO
+  save_plots: true
+  save_metrics: true 

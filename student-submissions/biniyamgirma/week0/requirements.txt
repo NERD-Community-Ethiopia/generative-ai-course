@@ -1,0 +1,8 @@
+langchain 
+openai 
+python-dotenv 
+requests
+jupyter 
+notebook
+huggingface_hub
+langchain-huggingface

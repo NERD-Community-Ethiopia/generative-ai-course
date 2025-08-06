@@ -1,12 +1,7 @@
 import os
 from dotenv import load_dotenv
-<<<<<<< HEAD
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
-=======
-#from langchain.llms import OpenAI
-from langchain_community.llms import OpenAI
->>>>>>> 559e8217e638b77eea7e26a78df15c712b119403
 from langchain.prompts import PromptTemplate
 
 # Load environment variables
@@ -62,4 +57,4 @@ def main():
         print("-" * 50)
 
 if __name__ == "__main__":
-    main()
+    main() 

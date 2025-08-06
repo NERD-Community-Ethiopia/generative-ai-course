@@ -1,26 +1,25 @@
 import os
 from dotenv import load_dotenv
-<<<<<<< HEAD
-from langchain.llms import OpenAI
-from langchain.chains import LLMChain
-=======
-#from langchain.llms import OpenAI
-from langchain_community.llms import OpenAI
->>>>>>> 559e8217e638b77eea7e26a78df15c712b119403
-from langchain.prompts import PromptTemplate
+from langchain_huggingface import HuggingFaceEndpoint
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough
 
 # Load environment variables
 load_dotenv()
 
 def create_simple_agent():
-    """Create a simple AI agent using OpenAI"""
+    """Create a simple AI agent using HuggingFace"""
     
-    # Initialize the language model
-    llm = OpenAI(temperature=0.7)
+    # Initialize the HuggingFace language model
+    llm = HuggingFaceEndpoint(
+        repo_id="google/flan-t5-large",
+        temperature=0.7,
+         # Changed to max_new_tokens
+        task= "text2text-genetration"
+    )
     
     # Create a prompt template
-    template = """
-    You are a helpful AI assistant. Answer the following question:
+    template = """You are a helpful AI assistant. Answer the following question:
     
     Question: {question}
     
@@ -31,8 +30,12 @@ def create_simple_agent():
         template=template
     )
     
-    # Create the chain
-    chain = LLMChain(llm=llm, prompt=prompt)
+    # Create the chain using the new recommended syntax
+    chain = (
+        {"question": RunnablePassthrough()} 
+        | prompt 
+        | llm
+    )
     
     return chain
 
@@ -49,12 +52,12 @@ def main():
         "What are the main challenges in AI deployment?"
     ]
     
-    print("🤖 Simple AI Agent Test\n")
+    print("🤖 Simple AI Agent Test (HuggingFace)\n")
     
     for i, question in enumerate(test_questions, 1):
         print(f"Question {i}: {question}")
         try:
-            response = agent.run(question)
+            response = agent.invoke(question)
             print(f"Answer: {response}\n")
         except Exception as e:
             print(f"Error: {e}\n")

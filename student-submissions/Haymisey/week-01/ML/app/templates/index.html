@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Classification System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-bg: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+        }
+        
+        .form-section {
+            padding: 2rem;
+        }
+        
+        .feature-input {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .result-card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .malignant {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .benign {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+        
+        .confidence-bar {
+            height: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            transition: width 1s ease;
+        }
+        
+        .feature-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .disclaimer {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .disclaimer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        
+        .disclaimer .d-flex {
+            margin-bottom: 0.5rem;
+        }
+        
+        .disclaimer strong {
+            color: #d68910;
+            font-size: 1.1rem;
+        }
+        
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        
+        .disclaimer i {
+            font-size: 1.2rem;
+        }
+        
+        .loading {
+            display: none;
+        }
+        
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .info-tooltip {
+            color: var(--secondary-color);
+            cursor: help;
+        }
+        
+        .feature-tabs {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-tabs .nav-link {
+            border-radius: 10px 10px 0 0;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                margin: 1rem;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .form-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-xl-10">
+                <div class="main-container">
+                    <!-- Header -->
+                    <div class="header text-center">
+                        <h1 class="mb-3">
+                            <i class="fas fa-heartbeat me-3"></i>
+                            Breast Cancer Classification System
+                        </h1>
+                        <p class="mb-0 fs-5">
+                            Advanced AI-powered diagnostic assistance for healthcare professionals
+                        </p>
+                    </div>
+
+                    <!-- Professional Disclaimer -->
+                    <div class="disclaimer">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                            <strong>Important Medical Disclaimer</strong>
+                        </div>
+                        <p class="mb-0">
+                            <strong>⚠️ FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY</strong><br>
+                            This AI-powered diagnostic tool is designed for educational demonstrations and research purposes. 
+                            <strong>It is NOT a certified medical device</strong> and should never be used for actual clinical diagnosis, 
+                            patient treatment, or medical decision-making. The predictions are based on machine learning algorithms 
+                            and are not a substitute for professional medical advice, diagnosis, or treatment. 
+                            <strong>Always consult with qualified healthcare professionals for all medical decisions.</strong>
+                        </p>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="form-section">
+                        <form id="predictionForm" novalidate>
+                            <!-- Patient Information -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="feature-group">
+                                        <label for="patient_name" class="form-label">
+                                            <i class="fas fa-user me-2"></i>Patient Name
+                                        </label>
+                                        <input type="text" class="form-control" id="patient_name" name="patient_name" 
+                                               placeholder="Enter patient name (e.g., Haymanot Abera)" required>
+                                        <div class="form-text">Enter the patient's full name for the report</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Feature Tabs -->
+                            <ul class="nav nav-tabs feature-tabs" id="featureTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="mean-tab" data-bs-toggle="tab" data-bs-target="#mean" type="button" role="tab">
+                                        <i class="fas fa-chart-line me-2"></i>Mean Values
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="se-tab" data-bs-toggle="tab" data-bs-target="#se" type="button" role="tab">
+                                        <i class="fas fa-chart-bar me-2"></i>Standard Error
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="worst-tab" data-bs-toggle="tab" data-bs-target="#worst" type="button" role="tab">
+                                        <i class="fas fa-chart-pie me-2"></i>Worst Values
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <!-- Tab Content -->
+                            <div class="tab-content" id="featureTabContent">
+                                <!-- Mean Values Tab -->
+                                <div class="tab-pane fade show active" id="mean" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Cell Characteristics (Mean)</h5>
+                                            <div class="feature-group">
+                                                <label for="radius_mean" class="form-label">Radius Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="radius_mean" name="radius_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="texture_mean" class="form-label">Texture Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="texture_mean" name="texture_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="perimeter_mean" class="form-label">Perimeter Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="perimeter_mean" name="perimeter_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="area_mean" class="form-label">Area Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="area_mean" name="area_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="smoothness_mean" class="form-label">Smoothness Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="smoothness_mean" name="smoothness_mean" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Additional Measurements (Mean)</h5>
+                                            <div class="feature-group">
+                                                <label for="compactness_mean" class="form-label">Compactness Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="compactness_mean" name="compactness_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concavity_mean" class="form-label">Concavity Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concavity_mean" name="concavity_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concave_points_mean" class="form-label">Concave Points Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concave_points_mean" name="concave_points_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="symmetry_mean" class="form-label">Symmetry Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="symmetry_mean" name="symmetry_mean" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="fractal_dimension_mean" class="form-label">Fractal Dimension Mean</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="fractal_dimension_mean" name="fractal_dimension_mean" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Standard Error Tab -->
+                                <div class="tab-pane fade" id="se" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Cell Characteristics (Standard Error)</h5>
+                                            <div class="feature-group">
+                                                <label for="radius_se" class="form-label">Radius SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="radius_se" name="radius_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="texture_se" class="form-label">Texture SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="texture_se" name="texture_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="perimeter_se" class="form-label">Perimeter SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="perimeter_se" name="perimeter_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="area_se" class="form-label">Area SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="area_se" name="area_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="smoothness_se" class="form-label">Smoothness SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="smoothness_se" name="smoothness_se" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Additional Measurements (Standard Error)</h5>
+                                            <div class="feature-group">
+                                                <label for="compactness_se" class="form-label">Compactness SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="compactness_se" name="compactness_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concavity_se" class="form-label">Concavity SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concavity_se" name="concavity_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concave_points_se" class="form-label">Concave Points SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concave_points_se" name="concave_points_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="symmetry_se" class="form-label">Symmetry SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="symmetry_se" name="symmetry_se" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="fractal_dimension_se" class="form-label">Fractal Dimension SE</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="fractal_dimension_se" name="fractal_dimension_se" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Worst Values Tab -->
+                                <div class="tab-pane fade" id="worst" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Cell Characteristics (Worst)</h5>
+                                            <div class="feature-group">
+                                                <label for="radius_worst" class="form-label">Radius Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="radius_worst" name="radius_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="texture_worst" class="form-label">Texture Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="texture_worst" name="texture_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="perimeter_worst" class="form-label">Perimeter Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="perimeter_worst" name="perimeter_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="area_worst" class="form-label">Area Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="area_worst" name="area_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="smoothness_worst" class="form-label">Smoothness Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="smoothness_worst" name="smoothness_worst" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="mb-3 text-primary">Additional Measurements (Worst)</h5>
+                                            <div class="feature-group">
+                                                <label for="compactness_worst" class="form-label">Compactness Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="compactness_worst" name="compactness_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concavity_worst" class="form-label">Concavity Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concavity_worst" name="concavity_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="concave_points_worst" class="form-label">Concave Points Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="concave_points_worst" name="concave_points_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="symmetry_worst" class="form-label">Symmetry Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="symmetry_worst" name="symmetry_worst" required>
+                                            </div>
+                                            <div class="feature-group">
+                                                <label for="fractal_dimension_worst" class="form-label">Fractal Dimension Worst</label>
+                                                <input type="number" step="any" class="form-control feature-input" id="fractal_dimension_worst" name="fractal_dimension_worst" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <!-- **** CHANGE 1: Changed type="submit" to type="button" **** -->
+                                    <button type="button" class="btn btn-primary btn-lg" id="submitBtn">
+                                        <span class="btn-text">
+                                            <i class="fas fa-search me-2"></i>
+                                            Analyze Sample
+                                        </span>
+                                        <span class="loading">
+                                            <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                            Analyzing...
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div id="resultsSection" class="p-4" style="display: none;">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card result-card">
+                                    <div class="card-body text-center p-4">
+                                        <h3 class="mb-4" id="resultTitle">
+                                            <i class="fas fa-chart-pie me-2"></i>
+                                            Analysis Results
+                                        </h3>
+                                        
+                                        <!-- Patient Information -->
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-user me-2"></i>
+                                                    <strong>Patient:</strong> <span id="patientNameDisplay">Unknown Patient</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-4">
+                                                    <h5 class="mb-3">Classification Result</h5>
+                                                    <div class="alert" id="resultAlert" role="alert">
+                                                        <h4 class="alert-heading" id="resultText"></h4>
+                                                        <p class="mb-0" id="resultDescription"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-6">
+                                                <div class="mb-4">
+                                                    <h5 class="mb-3">Confidence Level</h5>
+                                                    <div class="confidence-bar mb-2">
+                                                        <div class="confidence-fill" id="confidenceFill"></div>
+                                                    </div>
+                                                    <p class="mb-0" id="confidenceText"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title text-success">
+                                                            <i class="fas fa-check-circle me-2"></i>
+                                                            Benign Probability
+                                                        </h6>
+                                                        <p class="card-text fs-4" id="benignProb"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title text-danger">
+                                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                                            Malignant Probability
+                                                        </h6>
+                                                        <p class="card-text fs-4" id="malignantProb"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Explainable AI Section -->
+                                        <div class="explainability-section mt-4">
+                                            <h5 class="mb-3">
+                                                <i class="fas fa-brain me-2"></i>
+                                                Key Contributing Factors
+                                            </h5>
+                                            <p class="text-muted mb-3">Understanding what influenced this prediction:</p>
+                                            <div id="explainabilityFactors"></div>
+                                        </div>
+
+                                        <!-- Results Disclaimer -->
+                                        <div class="disclaimer mt-4">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-info-circle text-info me-2"></i>
+                                                <strong>Results Disclaimer</strong>
+                                            </div>
+                                            <p class="mb-0">
+                                                <strong>AI Prediction Results:</strong> These results are generated by machine learning algorithms for educational purposes only. 
+                                                The accuracy and reliability of predictions may vary. This tool is not intended for clinical use and should not replace 
+                                                professional medical evaluation. Always consult healthcare professionals for medical decisions.
+                                            </p>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <button class="btn btn-outline-primary" onclick="resetForm()">
+                                                <i class="fas fa-redo me-2"></i>
+                                                Analyze Another Sample
+                                            </button>
+                                            <button class="btn btn-success" onclick="downloadReport()">
+                                                <i class="fas fa-download me-2"></i>
+                                                Download Report
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            console.log('Form submitted!');
+            
+            const form = document.getElementById('predictionForm');
+            if (!form.checkValidity()) {
+                console.log('Form validation failed');
+                const firstInvalid = form.querySelector(':invalid');
+                if (firstInvalid) {
+                    const tabPane = firstInvalid.closest('.tab-pane');
+                    if (tabPane) {
+                        const tabId = tabPane.id;
+                        const tabButton = document.querySelector(`button[data-bs-target="#${tabId}"]`);
+                        if (tabButton) {
+                            new bootstrap.Tab(tabButton).show();
+                        }
+                    }
+                }
+                form.reportValidity();
+                return;
+            }
+
+            console.log('Form validation passed');
+    
+            document.getElementById('submitBtn').querySelector('.btn-text').style.display = 'none';
+            document.getElementById('submitBtn').querySelector('.loading').style.display = 'inline-block';
+            
+            const featureOrder = [
+                'radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean', 'smoothness_mean',
+                'compactness_mean', 'concavity_mean', 'concave_points_mean', 'symmetry_mean', 'fractal_dimension_mean',
+                'radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se',
+                'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se',
+                'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst',
+                'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'
+            ];
+            
+            const features = [];
+            const formData = new FormData(form);
+            
+            console.log('Collecting features...');
+            for (const featureName of featureOrder) {
+                const value = parseFloat(formData.get(featureName));
+                console.log(`${featureName}: ${value}`);
+                if (isNaN(value)) {
+                    features.push(0.5);
+                } else {
+                    features.push(value);
+                }
+            }
+            console.log('Features collected:', features);
+            
+            // Get patient name
+            const patientName = document.getElementById('patient_name').value || 'Unknown Patient';
+            console.log('Patient name:', patientName);
+            
+            try {
+                console.log('Making API call...');
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        features: features,
+                        patient_name: patientName
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('API Response:', result);
+                
+                displayResults(result);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error making prediction: ' + error.message);
+            } finally {
+                document.getElementById('submitBtn').querySelector('.btn-text').style.display = 'inline-block';
+                document.getElementById('submitBtn').querySelector('.loading').style.display = 'none';
+            }
+        });
+        
+    
+        function displayResults(result) {
+            console.log('Displaying results:', result);
+            
+            const resultsSection = document.getElementById('resultsSection');
+            const resultAlert = document.getElementById('resultAlert');
+            const resultText = document.getElementById('resultText');
+            const resultDescription = document.getElementById('resultDescription');
+            const confidenceFill = document.getElementById('confidenceFill');
+            const confidenceText = document.getElementById('confidenceText');
+            const benignProb = document.getElementById('benignProb');
+            const malignantProb = document.getElementById('malignantProb');
+            const patientNameDisplay = document.getElementById('patientNameDisplay');
+            
+            console.log('Found elements:', {
+                resultsSection: !!resultsSection,
+                resultAlert: !!resultAlert,
+                resultText: !!resultText,
+                resultDescription: !!resultDescription,
+                confidenceFill: !!confidenceFill,
+                confidenceText: !!confidenceText,
+                benignProb: !!benignProb,
+                malignantProb: !!malignantProb,
+                patientNameDisplay: !!patientNameDisplay
+            });
+            
+            // Display patient name
+            patientNameDisplay.textContent = result.patient_name || 'Unknown Patient';
+            
+            resultText.textContent = result.prediction.toUpperCase();
+            resultDescription.textContent = result.prediction === 'malignant' 
+                ? 'This sample shows characteristics associated with malignant cells. Further medical evaluation is recommended.'
+                : 'This sample shows characteristics associated with benign cells.';
+            
+            const confidence = Math.round(result.confidence * 100);
+            confidenceFill.style.width = confidence + '%';
+            confidenceText.textContent = `${confidence}% confidence`;
+            
+            benignProb.textContent = `${Math.round(result.probability_benign * 100)}%`;
+            malignantProb.textContent = `${Math.round(result.probability_malignant * 100)}%`;
+            
+            resultAlert.className = 'alert';
+            resultAlert.classList.add(result.prediction === 'malignant' ? 'alert-danger' : 'alert-success');
+    
+            const factorsContainer = document.getElementById('explainabilityFactors');
+            factorsContainer.innerHTML = ''; 
+            
+            if (result.contributing_factors && result.contributing_factors.length > 0) {
+                const listGroup = document.createElement('ul');
+                listGroup.className = 'list-group list-group-flush';
+    
+                result.contributing_factors.forEach(factor => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    
+                    // Create the main content div
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'd-flex justify-content-between align-items-center mb-2';
+                    
+                    // Factor name with icon
+                    const factorNameDiv = document.createElement('div');
+                    factorNameDiv.className = 'd-flex align-items-center';
+                    
+                    const isPositive = factor.direction.includes('increases');
+                    const icon = document.createElement('i');
+                    icon.className = `fas ${isPositive ? 'fa-arrow-up text-danger' : 'fa-arrow-down text-success'} me-2`;
+                    
+                    const factorName = document.createElement('span');
+                    factorName.className = 'fw-bold';
+                    factorName.textContent = factor.name;
+                    
+                    factorNameDiv.appendChild(icon);
+                    factorNameDiv.appendChild(factorName);
+                    
+                    // Impact badge
+                    const impactBadge = document.createElement('span');
+                    impactBadge.className = isPositive ? 'badge bg-danger' : 'badge bg-success';
+                    impactBadge.textContent = `${(factor.impact * 100).toFixed(1)}% Impact`;
+                    
+                    contentDiv.appendChild(factorNameDiv);
+                    contentDiv.appendChild(impactBadge);
+                    
+                    // Direction description
+                    const directionDiv = document.createElement('div');
+                    directionDiv.className = 'text-muted small';
+                    directionDiv.textContent = factor.direction;
+                    
+                    listItem.appendChild(contentDiv);
+                    listItem.appendChild(directionDiv);
+                    listGroup.appendChild(listItem);
+                });
+                factorsContainer.appendChild(listGroup);
+            } else {
+                // Fallback if no factors are provided
+                const noFactorsDiv = document.createElement('div');
+                noFactorsDiv.className = 'text-muted text-center py-3';
+                noFactorsDiv.innerHTML = '<i class="fas fa-info-circle me-2"></i>No contributing factors available';
+                factorsContainer.appendChild(noFactorsDiv);
+            }
+            
+            console.log('Showing results section');
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+
+        function downloadReport() {
+            // Get the current features from the form
+            const form = document.getElementById('predictionForm');
+            const featureOrder = [
+                'radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean', 'smoothness_mean',
+                'compactness_mean', 'concavity_mean', 'concave_points_mean', 'symmetry_mean', 'fractal_dimension_mean',
+                'radius_se', 'texture_se', 'perimeter_se', 'area_se', 'smoothness_se',
+                'compactness_se', 'concavity_se', 'concave_points_se', 'symmetry_se', 'fractal_dimension_se',
+                'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst', 'smoothness_worst',
+                'compactness_worst', 'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'
+            ];
+            
+            const features = [];
+            const formData = new FormData(form);
+            
+            for (const featureName of featureOrder) {
+                const value = parseFloat(formData.get(featureName));
+                if (isNaN(value)) {
+                    features.push(0.5);
+                } else {
+                    features.push(value);
+                }
+            }
+            
+            // Get patient name
+            const patientName = document.getElementById('patient_name').value || 'Unknown Patient';
+            
+            // Show loading state
+            const downloadBtn = document.querySelector('button[onclick="downloadReport()"]');
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generating PDF...';
+            downloadBtn.disabled = true;
+            
+            // Call the PDF generation endpoint
+            fetch('/generate-pdf', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    features: features,
+                    patient_name: patientName
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `breast_cancer_prediction_report_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                
+                // Show success message
+                //alert('PDF report generated successfully!');
+            })
+            .catch(error => {
+                console.error('PDF generation error:', error);
+                alert('Error generating PDF report. Please try again.');
+            })
+            .finally(() => {
+                // Restore button state
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.disabled = false;
+            });
+        }
+    
+
+        function resetForm() {
+            document.getElementById('predictionForm').reset();
+            document.getElementById('resultsSection').style.display = 'none';
+        }
+        
+        function loadSampleData() {
+            const sampleData = {
+                'radius_mean': 17.99, 'texture_mean': 10.38, 'perimeter_mean': 122.8, 'area_mean': 1001.0, 'smoothness_mean': 0.1184,
+                'compactness_mean': 0.2776, 'concavity_mean': 0.3001, 'concave_points_mean': 0.1471, 'symmetry_mean': 0.2419, 'fractal_dimension_mean': 0.07871,
+                'radius_se': 1.095, 'texture_se': 0.9053, 'perimeter_se': 8.589, 'area_se': 153.4, 'smoothness_se': 0.006399,
+                'compactness_se': 0.04904, 'concavity_se': 0.05373, 'concave_points_se': 0.01587, 'symmetry_se': 0.03003, 'fractal_dimension_se': 0.006193,
+                'radius_worst': 25.38, 'texture_worst': 17.33, 'perimeter_worst': 184.6, 'area_worst': 2019.0, 'smoothness_worst': 0.1622,
+                'compactness_worst': 0.6656, 'concavity_worst': 0.7119, 'concave_points_worst': 0.2654, 'symmetry_worst': 0.4601, 'fractal_dimension_worst': 0.1189
+            };
+            
+            Object.keys(sampleData).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = sampleData[key];
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const sampleButton = document.createElement('button');
+            sampleButton.type = 'button';
+            sampleButton.className = 'btn btn-outline-secondary btn-sm ms-2';
+            sampleButton.innerHTML = '<i class="fas fa-flask me-1"></i>Load Sample Data';
+            sampleButton.onclick = loadSampleData;
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.parentNode.appendChild(sampleButton);
+        });
+    </script>
+</body>
+</html>

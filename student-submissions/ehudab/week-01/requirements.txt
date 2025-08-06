@@ -1,0 +1,6 @@
+# Requirements for Week 1 AI Agents (OpenRouter + LangChain)
+python-dotenv
+langchain
+langchain_openai
+langchain_community
+openai 

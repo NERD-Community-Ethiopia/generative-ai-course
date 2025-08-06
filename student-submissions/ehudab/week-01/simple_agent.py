@@ -1,22 +1,22 @@
 import os
 from dotenv import load_dotenv
-<<<<<<< HEAD
-from langchain.llms import OpenAI
+# Use ChatOpenAI from langchain_openai for OpenRouter
+from langchain_openai import ChatOpenAI
 from langchain.chains import LLMChain
-=======
-#from langchain.llms import OpenAI
-from langchain_community.llms import OpenAI
->>>>>>> 559e8217e638b77eea7e26a78df15c712b119403
 from langchain.prompts import PromptTemplate
 
-# Load environment variables
+# Load environment variables (expects OPENROUTER_API_KEY in .env)
 load_dotenv()
 
 def create_simple_agent():
-    """Create a simple AI agent using OpenAI"""
-    
-    # Initialize the language model
-    llm = OpenAI(temperature=0.7)
+    """Create a simple AI agent using OpenRouter's Qwen model via LangChain"""
+    # Initialize the language model with OpenRouter endpoint and Qwen model
+    llm = ChatOpenAI(
+        base_url="https://openrouter.ai/api/v1",  # OpenRouter endpoint
+        model="qwen/qwen3-coder:free",            # Qwen Coder (free) model
+        temperature=0.7,
+        api_key=os.getenv("OPENROUTER_API_KEY")    # API key from .env
+    )
     
     # Create a prompt template
     template = """
@@ -54,7 +54,8 @@ def main():
     for i, question in enumerate(test_questions, 1):
         print(f"Question {i}: {question}")
         try:
-            response = agent.run(question)
+            # Use .invoke() instead of deprecated .run()
+            response = agent.invoke({"question": question})
             print(f"Answer: {response}\n")
         except Exception as e:
             print(f"Error: {e}\n")

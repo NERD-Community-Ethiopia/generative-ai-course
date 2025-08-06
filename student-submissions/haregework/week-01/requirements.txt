@@ -1,0 +1,26 @@
+# Week 1 Assignment Dependencies
+# Social Network Simulation using NetworkX
+
+# Core network analysis library
+networkx==3.1
+
+# Visualization and plotting
+matplotlib==3.7.1
+
+# Numerical computations
+numpy==1.24.3
+
+# HTTP library for potential API calls
+requests==2.31.0
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Additional utilities
+pandas==2.0.3
+scipy==1.11.1
+
+# Development and testing tools
+pytest==7.4.0
+black==23.7.0
+flake8==6.0.0 

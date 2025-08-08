@@ -5,7 +5,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories import ChatMessageHistory
 
-
 # Load environment variables
 load_dotenv()
 
@@ -35,8 +34,8 @@ def create_interactive_agent():
     return chain_with_history
 
 def chat_interface():
-    """Interactive chat interface"""   
-    print("🤖 Interactive AI Agent")
+    """Interactive chat interface"""
+    print("🤖 Interactive AI Agent (Modern)")
     print("Type 'quit' to exit\n")
     
     # Create the agent
@@ -63,6 +62,6 @@ def chat_interface():
             
         except Exception as e:
             print(f"Error: {str(e)[:200]}\n")  # Truncate long errors
- 
+
 if __name__ == "__main__":
     chat_interface()
